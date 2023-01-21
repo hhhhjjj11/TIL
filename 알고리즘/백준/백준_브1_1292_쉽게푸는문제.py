@@ -1,3 +1,5 @@
+A, B =map(int,input().split())
+
 def fun(X):
     res=0
     cnt=0
@@ -12,8 +14,6 @@ def fun(X):
                     break
                 res+=i
                 cnt+=1
-                print(res)
     return res
 
-fun(3)
-fun(7)
+print(fun(B)-fun(A-1))
