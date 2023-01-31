@@ -1,8 +1,16 @@
+N = int(input())
+
+# 만약 다른 함수 다음 문자열이
+
 def isGroup(S):
     res = True
     n=0
+    if len(S) == 1:
+        return True
     while True :
-        
+        if n == len(S)-1:
+            break
+       
         if S[n] == S[n+1]:   # 만약 연속한 두항이 같으면 다음항따지기 
             n+=1
             continue
@@ -15,10 +23,13 @@ def isGroup(S):
             break
         
         n+=1
-        if n == len(S)-1:
-            break
-
+       
     return res
 
+cnt=0
+for t in range(N):
+    a = input()
+    if isGroup(a) == True :
+        cnt+=1
 
-print(isGroup('aba'))
+print(cnt)
