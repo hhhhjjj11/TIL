@@ -1,5 +1,2 @@
-str = 'aaaaaa'
-
-str = str.replace('a','.')
-
-print(str)
+a,b = [1,2]
+print(a)
