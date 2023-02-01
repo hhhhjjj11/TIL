@@ -1,1 +1,5 @@
-print(list(range(3)))
+str = 'aaaaaa'
+
+str = str.replace('a','.')
+
+print(str)
