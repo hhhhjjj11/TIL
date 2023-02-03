@@ -1,41 +1,40 @@
-N = int(input())
-li1 = list(map(int,input().split()))
-M = int(input())
-li2 = list(map(int,input().split()))
-li1.sort()
+N ,M = map(int,input().split())
 
-def bin_search(n):
+NO =[[]]*201
+print('NO', NO)
+for _ in range(M):
+    p,q = map(int,input().split())
+    mm = min([q,p])
+    MM = max([q,p])
+    print('p,q :',p,q,'m,M :',mm,MM)
+    NO[mm].append(MM)
+    print(NO[mm])
+    
 
-    mid=len(li1)//2  # 2
-    leng = mid  # 2
-    while True:
-        if n == li1[mid]: # 10 == li[2](=3)
-            return 1
-        if leng == 1 :
-            if mid == 0:
-                return 0
-            elif mid == len(li1)-1:
-                return 0
-            elif li1[mid+1]==n or li1[mid-1]==n:
-                return 1
-            return 0
-        if n < li1[mid]:
-            leng+=1
-            leng//=2
-            mid-=leng
-        else:
-            leng+=1
-            leng//=2
-            mid+=leng   # mid = mid +1 =3 
+print('NO',NO)
+res = []
 
+for i in range(1, N+1):
+    for j in range(i+1, N+1):
+        for k in range(j+1, N+1):
+            res.append({i,j,k})
 
-for item in li2:
-    print(bin_search(item),end=' ')
+cnt=0
 
-
-# 이진판별을 내 나름대로 짜봤다. 
-# 가운데 숫자(li[mid])와 양쪽 폭(leng)을 변수로 잡고 
-# 근데 이렇게 하면 안된다
-# 왜 이렇게 하면 안되는건지 생각해보았다.
-# 대충 정리하면 다음과 같다.
-# 1. 
+for i in range(len(res)):  # 결과들 모아놓은것
+    isRight=True
+    for j, li in enumerate(NO):  # 금지조합의 인덱스와 각항
+        for v in li:
+            print('j,v',{j,v})
+            if len(res[i]-{j,v}) ==1 :
+                isRight=False    
+            if isRight==False:
+                break
+        if isRight==False:
+            break
+    if isRight==False:
+        continue
+    else:
+        cnt+=1
+        
+print(cnt)
