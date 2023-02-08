@@ -1,16 +1,30 @@
-from collections import deque
-
 N,M,V = map(int,input().split())
 
-li = []
+graph = []
 for i in range(M):
-    li.append(list(map(int,input().split())))
+    graph.append(list(map(int,input().split())))
 
-visited = [0] * (N+1)
-d = deque()
-d.append(V)
+dic ={}
+for item in graph:
+    dic[item[0]] = dic.get(item[0],{item[1]})
+    dic[item[0]].add(item[1])
 
-while d<N:
-    d.append
+for key, value in dic.items():
+    dic[key] = list(dic[key])
 
-# 연결되어있는 
+print(graph)
+print(dic)
+
+visited = [0]*(N+1)
+visited[V] = 1 
+stack = [V]
+res = [V]
+
+while stack:
+
+    x = stack.pop()
+
+    for i in range(len(dic[x])):
+        if not visited[dic[x][i]]:
+            stack.append(dic[x][i])
+            
