@@ -1,30 +1,32 @@
-N,M,V = map(int,input().split())
+M = int(input())
 
-graph = []
-for i in range(M):
-    graph.append(list(map(int,input().split())))
 
-dic ={}
-for item in graph:
-    dic[item[0]] = dic.get(item[0],{item[1]})
-    dic[item[0]].add(item[1])
-
-for key, value in dic.items():
-    dic[key] = list(dic[key])
-
-print(graph)
-print(dic)
-
-visited = [0]*(N+1)
-visited[V] = 1 
-stack = [V]
-res = [V]
-
-while stack:
-
-    x = stack.pop()
-
-    for i in range(len(dic[x])):
-        if not visited[dic[x][i]]:
-            stack.append(dic[x][i])
-            
+for _ in range(M):
+    inp = input()
+    if inp == 'empty' or inp=='all':
+        c=inp
+    else :
+        c,n = inp.split()
+    s=set()
+    if c == 'add':
+        s.add(n)
+        print(s)
+    if c == 'check':
+        print('n',n)
+        if str(n) in s:
+            print(1)
+        else:
+            print(0)
+    if c == 'remove':
+        s.discard(n)
+    if c == 'toggle':
+        if n in s:
+            s.remove(n)
+        else:
+            s.add(n)
+    if c == 'all':
+        s ={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20}
+    if c == 'empty':
+        s = set()
+    
+    
