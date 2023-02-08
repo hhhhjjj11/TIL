@@ -10,8 +10,7 @@ visited = [0] * (N+1)
 d = deque()
 d.append(V)
 
-while d:
-    x= d.popleft()
-    
-    if x == 
+while d<N:
+    d.append
 
+# 연결되어있는 
