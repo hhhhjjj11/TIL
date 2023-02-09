@@ -2,7 +2,7 @@ N = int(input())
 
 step =[0]
 
-for _ in range(6):
+for _ in range(N):
     step.append(int(input()))
 
 Memo = [0]*(N+1)
@@ -19,7 +19,7 @@ while now<N:
     if now >= 4:
         Memo[now] = max(Memo[now-3]+step[now-1], Memo[now-2])+step[now] 
 
-print(Memo)
+#print(Memo)
 print(Memo[N])
 
 
