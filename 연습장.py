@@ -1,32 +1,26 @@
-M = int(input())
+N = int(input())
+
+step =[0]
+
+for _ in range(6):
+    step.append(int(input()))
+
+Memo = [0]*(N+1)
+now=0
+
+while now<N:
+    now += 1
+    if now == 1:
+        Memo[1] = step[1]
+    if now == 2:
+        Memo[2] = step[1] + step[2]
+    if now == 3:
+        Memo[3] = max(step[2],step[1]) + step[3]
+    if now >= 4:
+        Memo[now] = max(Memo[now-3]+step[now-1], Memo[now-2])+step[now] 
+
+print(Memo)
+print(Memo[N])
 
 
-for _ in range(M):
-    inp = input()
-    if inp == 'empty' or inp=='all':
-        c=inp
-    else :
-        c,n = inp.split()
-    s=set()
-    if c == 'add':
-        s.add(n)
-        print(s)
-    if c == 'check':
-        print('n',n)
-        if str(n) in s:
-            print(1)
-        else:
-            print(0)
-    if c == 'remove':
-        s.discard(n)
-    if c == 'toggle':
-        if n in s:
-            s.remove(n)
-        else:
-            s.add(n)
-    if c == 'all':
-        s ={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20}
-    if c == 'empty':
-        s = set()
-    
     
