@@ -1,14 +1,15 @@
-import sys
-input = sys.stdin.readline
+n = int(input())
 
-n = int(input().strip())
+li = [0, 1, 3]
 
-li = [0,1,2,3]
+for _ in range(998):
+    li.append(0)
 
-
-def tile(n):
-    if n <= 3:
+def sol(n):
+    if li[n] != 0:
         return li[n]
-    return tile(n-1)+tile(n-2)
+    else:
+        li[n] = 2*sol(n-2)+sol(n-1)
+        return li[n]
 
-print(tile(n)%10007)
+print(sol(n)%10007)
