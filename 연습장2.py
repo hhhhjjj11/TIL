@@ -1,8 +1,3 @@
-li = [1,2,3]
+a = 12345678
 
-a = li
-
-a[0]
-
-
-print('a',a,'b',b)
+print(str(a)[len(str(a))-4:])
