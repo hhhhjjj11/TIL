@@ -1,3 +1,29 @@
+# 좋아보이는 풀이
+import sys
+
+def solution():
+    n , *nums = map(int,sys.stdin.buffer.read().splitness())
+    s = []
+    answer = []
+    cur = 1 # 커렌트 변수 사용해서 카운팅. 
+    for value in nums:
+        while cur <= value:
+            answer.append('+')
+            s.append(cur)
+            cur += 1
+            if s.pop() != value:
+                return 'NO'
+            # 어차피 꺼냈을때 다음항이 아니면 꺼낸거 그냥 버려야되는거임. 
+            # 하나라도 그냥 버리면 원하는 수열 절대 못만듬★
+            
+        answer.append('-')
+
+    return '\n'.join(answer)
+
+print(solution())    
+
+
+# 나의 풀이....
 n = int(input())
 
 stack = []
