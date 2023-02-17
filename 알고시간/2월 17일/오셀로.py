@@ -73,7 +73,7 @@ for tc in range(1,T+1):
                                 for temp_idx in temp:
                                     li[temp_idx[0]][temp_idx[1]] = 'W'
                             # for X in li:
-                            #     print(X)        
+                            #     print(X)
                             break
                     else:
                         break
