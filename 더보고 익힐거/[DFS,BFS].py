@@ -30,7 +30,7 @@ x = V
 
 print(V, end=' ')
 while True:
-
+    
     B = True
     # if x not in dic.keys():
     #     break
