@@ -1,4 +1,5 @@
 from pprint import pprint
+
 N,M = map(int,input().split())
 
 def right(Xi,Xj):
@@ -18,8 +19,6 @@ def right(Xi,Xj):
         Xj -= cnt
     brd[Xi][Xj] = 'R' if RB =='R' else 'B'
     return Xi,Xj
-
-
 
 
 def left(Xi,Xj):
