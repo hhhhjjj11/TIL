@@ -59,7 +59,7 @@ def solution():
                     else:
                         bbx, bby = bbx-dx, bby-dy
 
-                if (rrx,rry,bbx,bby) in visited:    # 이미 방문했었던 곳이면 다른방향으로 기울여보기
+                if (rrx,rry,bbx,bby) in visited:    # 이미 이 상황을 고려한적이 있으면 다른방향으로 기울여보기
                     continue
                 else:                               # 이런상황은 처음이면
                     visited[(rrx,rry,bbx,bby)] = 1  # 현재 공들 위치 저장하고
