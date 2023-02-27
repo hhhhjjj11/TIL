@@ -1,2 +1,35 @@
-if (1,2,3,4) in {(1,2):1, (3,4):2} :
-    print(1)
+
+for tc in range(1,11):
+    length, start = map(int,input().split())
+    li = list(map(int,input().split()))
+
+    g = {}
+
+    for i in range(length//2):
+        a, b = li[i*2], li[i*2+1]
+        if a in g:
+            g[a].add(b)
+        else:
+            g[a] = {b}
+
+    deck = [(start,0)]
+    visited = [0]*101
+    li_dist = [0]*101
+
+    while deck:
+        X, distance = deck.pop(0)
+        li_dist[X] = distance
+
+        if X in g:
+            for node in g[X]:
+                if not visited[node]:
+                    deck.append((node,distance+1))
+                    visited[node] = 1
+
+    M = max(li_dist)
+    Max_idxes = []
+    for idx, dist in enumerate(li_dist):
+        if dist == M:
+            Max_idxes.append(idx)
+
+    print(f'#{tc} {max(Max_idxes)}')
