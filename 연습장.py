@@ -1,69 +1,25 @@
-from pprint import pprint
+# 2진수 10진수로 바꾸기 7비트씩 끊어서.
+arr = list(map(int,input()))
 
-T = int(input())
+N = len(arr)
 
-decode = {
-    0: '0001101',
-    1: '0011001',
-    2: '0010011',
-    3: '0111101',
-    4: '0100011',
-    5: '0110001',
-    6: '0101111',
-    7: '0111011',
-    8: '0110111',
-    9: '0001011'
-}
+num = 0
 
-for tc in range(1,T+1):
-    res = 0
-    N, M = map(int,input().split())
+for i in range(N):
+    j = i % 7
+    num += arr[i] * (2**(6-j))
+    if j ==6 :
+        print(num, end=' ')
 
-    temp = ''
-    for _ in range(M):
-        temp+='0'
 
-    for i in range(N):
-        A = input()
-        if A == temp:
-            continue
-        code = A
+# 16진수를 2진수로 바꾸기
+# 16진수 숫자 하나는 2진수로 바꾸면 4자리 숫자가 된다는 점!
 
-    code = list(code)
-    while code[-1] == '0':
-        code.pop()
+arr = input() # 16진수 수를 인풋으로 받아서
 
-    while code[0] == '0':
-        code.pop(0)
-
-    code = ''.join(code)
-
-    sparezero = 56 - len(code)
-    #print('len',len(code), 'spare',sparezero)
-    empty = ''
-    for _ in range(sparezero):
-        empty += '0'
-    code = empty + code
-    code2 = []
-    for k in range(8):
-        temp = code[k*7:(k+1)*7]
-        for x in range(10):
-            if decode[x] == temp:
-                code2.append(x)
-
-    code2 = list(map(int,code2))
-    code2 = code2[::-1]
-
-    S = 0
-
-    for i in range(len(code2)):
-        if i%2 == 0:
-            S += code2[i]
-
-        else:
-            S += code2[i]*3
-
-    if S % 10 == 0:
-        res = sum(code2)
-    print(f'#{tc} {res}')
-
+for x in arr:
+    num = int(x,16)
+    for j in range(3, -1, -1):
+        bit = 1 if num &(1<<j) else 0
+        print(bit, end= '')
+    print(' ', end= '')
