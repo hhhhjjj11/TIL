@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from pprint import pprint
 
 T = int(input())
@@ -68,5 +67,3 @@ for tc in range(1,T+1):
         res = sum(code2)
     print(f'#{tc} {res}')
 
-=======
->>>>>>> fe4413a2bb00a5d00e2deae93e3264b03537a67c
