@@ -1,5 +1,5 @@
-# import sys
-# sys.stdin = open('1242_in.txt', 'r')
+import sys
+sys.stdin = open('13.txt', 'r')
 
 T = int(input())
 
@@ -41,48 +41,52 @@ for tc in range(1,T+1):
                 #print(bit, end ='')
         if temp2 not in codes:
             codes.append(temp2)
-
+  
     for x in range(len(codes)):
         code = codes[x]
+        while code[-1] ==0:
+            code.pop()
+        while code[0] == 0:
+            code.pop(0)
         #print('code',code)
         temp3 = []
         cnt = 0
         for i in range(len(code)-1,-1,-1):
-            if code[i] == 0 and code[i-1] == 1:
-                cnt += 1
+            if i != 0:
+                if code[i] != code[i-1]:
+                    cnt += 1
+                    temp3.append(cnt)
+                    cnt = 0
+                else:
+                    cnt+=1
+            else:
+                cnt+=1
                 temp3.append(cnt)
-                cnt = 0
-            elif code[i] == 1 and code[i-1] ==0:
-                cnt += 1
-                temp3.append(cnt)
-                cnt = 0
-            elif code[i] == 1:
-                cnt += 1
-            elif code[i] == 0:
-                cnt += 1
         temp3.append(0) # 앞에 0개수 모르긴하지만 임의로 0추가해줌 뒤에서 4씩나누기편하게
         temp3 = temp3[::-1]
         codes[x] = temp3
+        #print('len',len(codes[x]))
         #print('temp3',temp3)
 
     #print('codes',codes)
-
+    print('len',len(codes))
     codebin = []
     for i in range(len(codes)):
         code = codes[i]
         temp1 = []
-        temp2 = []
         cnt = 0
-        for j in range(len(code)):
-            if cnt<32:
+        for j in range(32):
+            if cnt < 32:
                 temp1.append(code[j])
                 cnt += 1
-            elif cnt == 32:
+            if cnt == 32:
                 cnt = 0
+                #print('tmep1',temp1)
                 if temp1 not in codebin:
                     codebin.append(temp1)
                 temp1 = []
     #print('codebin', codebin)
+    print('개수 39여야함',len(codebin))
     for i in range(len(codebin)):
         code = codebin[i]
         sortedcode = sorted(code)
@@ -111,7 +115,8 @@ for tc in range(1,T+1):
                         password.append(k)
         if len(password) == 8:
             passwords.append(password)
-    #print(passwords)
+
+    
     Final = 0
     for i in range(len(passwords)):
         password = passwords[i]
@@ -123,11 +128,11 @@ for tc in range(1,T+1):
                 S += password[j]
             else:
                 S += password[j]*3
-        #print('S',S)
+        print('S',S)
+        print('i, S, sum', i, S, sum(password))
         if S % 10 == 0:
             Final += sum(password)
 
     print(f'#{tc} {Final}')
 
     # 각각의 0이 아닌 행들에 대하여 오른쪽에서 부터 세준다.
-
