@@ -1,25 +1,61 @@
-# 2진수 10진수로 바꾸기 7비트씩 끊어서.
-arr = list(map(int,input()))
+from collections import deque
 
-N = len(arr)
+N = int(input())
 
-num = 0
+board = [list(map(int,input().split())) for _ in range(N)]
 
-for i in range(N):
-    j = i % 7
-    num += arr[i] * (2**(6-j))
-    if j ==6 :
-        print(num, end=' ')
+deck = deque()
 
+deck.append((board, 0))
 
-# 16진수를 2진수로 바꾸기
-# 16진수 숫자 하나는 2진수로 바꾸면 4자리 숫자가 된다는 점!
+direction = [(1,0),(0,1),(-1,0),(0,-1)]
 
-arr = input() # 16진수 수를 인풋으로 받아서
+def move(board, dir):
+    if dir == (1,0): # 아래로 -> 각 열 별로 따져야함.
+        for j in range(N):
+            deck2 = deque()
+            for i in range(N-1,-1,-1):
+                if board[i][j] != 0:
+                    deck2.append(board[i][j])
+                    board[i][j] = 0
+            ni, nj = N-1, j
+            while deck2:
+                x = deck2.popleft()
+                if not board[ni][nj]: # 0이면 걍 넣고
+                    board[ni][nj] = x
+                elif board[ni][nj] ==  x: # 뭐 있는데 같으면 더하고
+                    board[ni][nj] *= 2
+                    ni -= 1 # 커서 위로 한칸 올리고
+                else: # 뭐 있는데 다르다. -> 커서 한칸 올리고 거따가 넣는다.
+                    ni -= 1
+                    board[ni][nj] = x
+    elif dir == (-1,0):
+        for j in range(N):
+            deck2 =deque()
+            for i in range(N):
+                if board[i][j] != 0:
+                    pass
+    elif dir == (0,1):
+        pass
+    elif dir == (0,-1):
+        pass
 
-for x in arr:
-    num = int(x,16)
-    for j in range(3, -1, -1):
-        bit = 1 if num &(1<<j) else 0
-        print(bit, end= '')
-    print(' ', end= '')
+    return board
+
+M = 0
+
+while deck:
+    board, cnt = deck.pop(0)
+    if cnt > 5:
+        break
+    if cnt == 5:
+        for i in range(N):
+            for j in range(N):
+                if board[i][j] > M:
+                    M = board[i][j]
+    for dir in direction:
+        board_after_move = move(board, dir)
+        deck.append(board_after_move, cnt+1)
+
+print(M)
+
