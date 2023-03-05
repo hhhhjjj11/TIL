@@ -1,7 +1,5 @@
 from collections import deque
-from pprint import pprint
 
-# 입력받기
 N = int(input())
 K = int(input())
 
@@ -23,35 +21,23 @@ for i in range(L):
     a = int(a)
     directs.append((a,b))
 
-# 방향 데이터
-bh = {'오': (0,1),'왼': (0,-1),'위': (-1,0),'아래':(1,0)}
-
-# 방향바꿔주는 함수
-def changedir(d,r):
-    if (d =='왼'and r == 'L') or (d == '오' and r == 'D'):
-        return '아래'
-    elif (d =='왼' and r =='D') or (d == '오' and r == 'L'):
-        return '위'
-    elif (d == '아래' and r == 'L') or (d== '위' and r == 'D'):
-        return  '오'
-    elif (d == '아래' and r == 'D') or (d == '위' and r =='L'):
-        return '왼'
+dir = [(-1,0), (0,1), (1,0), (0,-1)] 
+# 시계방향.. 위 오른쪽 아래 왼쪽 인덱스기준 +1 하면 오른쪽으로 회전, -1하면 왼쪽으로 회전함.
 
 OVER = False
 
 # 초기방향
-dirnow = '오'
-di, dj  = bh[dirnow][0], bh[dirnow][1]
+dnow = 1
+di, dj  = dir[dnow][0],dir[dnow][1]
 
 tnow = 0
 
 Hi,Hj = 0,0 # 대가리
-Ti,Tj = 0,0 # 꼬리
 
 for i in range(L+1):
     if i<L:
-        dir = directs[i] 
-        time, rot = dir[0], dir[1] # time 이 되면 rot만큼 회전 해야함
+        direct = directs[i] 
+        time, rot = direct[0], direct[1] # time 이 되면 rot만큼 회전 해야함
     while True:
         tnow+=1
         # 머리 이동(현재방향으로)
@@ -81,8 +67,11 @@ for i in range(L+1):
     if OVER:
         break
     # tnow == time 이되면 방향 바꾸기 (while문 빠져나왓으니.)
-    dirnow = changedir(dirnow, rot)
-    di, dj = bh[dirnow][0], bh[dirnow][1]
+    if rot == 'D':
+        dnow = (dnow+1)%4
+    elif rot == 'L':
+        dnow = (dnow-1)%4
+    di, dj = dir[dnow][0], dir[dnow][1]
 
 res = tnow
 
