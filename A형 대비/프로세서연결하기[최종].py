@@ -3,7 +3,7 @@
 까다로운 조건1 : "연결이 안되는 프로세서가 있을수도 있다" -> 연결을 안하는 경우도 dfs의 케이스에 넣어주어야함.
 -> 이 경우 코어번호만 증가시켜서 넘긴다. -> 코어번호만 증가시켜서 다시 스택에 넣는다.
 까다로운 조건2 : 방향에 따라 연결이 되는 방향이 있고 안되는 방향이 있는데, 이때 연결 안되는 방향은 continue로 넘길경우,
-네 방향 전부에서 막혀있는 프로세스의 경우에서는 더이상 진행이 안되고 pop만 됨. 
+네 방향 전부에서 막혀있는 프로세스의 경우에서는 더이상 진행이 안되고 pop만 됨.
 -> 그래서 모든 방향에서 연결이 안될경우 따로 취급하여 코어번호를 1증가시켜서 스택에 다시 넣어주는 로직을 추가해줘야함.
 """
 
@@ -35,8 +35,8 @@ for tc in range(1,T+1):
         for j in range(1,N-1):
             if board[i][j]:
                 core_total_num += 1
-                cores.append((i,j))    
-    stack = [] 
+                cores.append((i,j))
+    stack = []
     corenum, linked, lines = 0, 0, 0
     stack.append((board, corenum, linked, lines))                     # corenum번의 core까지 계산한 보드.
 
@@ -46,8 +46,8 @@ for tc in range(1,T+1):
     while stack:                                                      # DFS + 백트래킹
         board, corenum, linked, lines = stack.pop()
         core_now = corenum + 1
-        if corenum == core_total_num:                                # 모든 코어를 다 처리했다면, 
-            if linked > M_linked : 
+        if corenum == core_total_num:                                # 모든 코어를 다 처리했다면,
+            if linked > M_linked :
                 M_linked = linked
                 m_lines = lines
             elif linked == M_linked:            # 연결된 코어갯수가 최대로 같을 경우 전선개수가 작은 것이 답.
@@ -56,7 +56,7 @@ for tc in range(1,T+1):
         else:
             islinked = False
             for dir in directs:                                           # 각 방향에 대해 현재 코어에서 액션처리
-                if dir ==(0,0):                                            # 이 경우 현재코어에 연결하지 않고 그냥 넘어가는거임. 코어번호만 다음으로 넘긴다.  
+                if dir ==(0,0):                                            # 이 경우 현재코어에 연결하지 않고 그냥 넘어가는거임. 코어번호만 다음으로 넘긴다.
                     stack.append((board,core_now,linked,lines))
                     continue
                 board_after_link, addedline = link(board,dir,core_now)    # link함수에서, 전선이 겹치면 0을 리턴하도록 하자.
@@ -69,19 +69,16 @@ for tc in range(1,T+1):
                                                                           # 전선이 겹치지 않는 경우는 스택에 추가한다.
     print(f'#{tc} {m_lines}')                                          # 참고 : 트리 상에서 다시 위로 올라갈 필요가 없음, 계속 "누적"되므로.
                                                                     # 따라서, pop한 부모노드를 다시 append할필요가 없음. (좀 더 명확히 정리 필요)
-    
-    
 
 
 
 """
   # 아래와 같이 하면 안될 것 같은데.. 이유가 정확히 머지?? clearify하기.
-    for core in cores: # 각 코어들에 대해 
-        for dir in directs: # 5가지 경우로 
+    for core in cores: # 각 코어들에 대해
+        for dir in directs: # 5가지 경우로
             board_after_link = link(core, dir) # 보드를 바꿔서 리턴하는 함수.
-    # 이유 : 다섯가지경우 각각에 대해 다시 다섯가지 경우가 펼쳐져야함. 
+    # 이유 : 다섯가지경우 각각에 대해 다시 다섯가지 경우가 펼쳐져야함.
     # 근데 저렇게 하면 마지막 dir만 적용된 상태로 다음 코어로 넘어간다..(?) 따라서 기록을해놔야함..(?)
 
 """
 
-  

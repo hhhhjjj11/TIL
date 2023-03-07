@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 리스트 부분만 빨간색으로*/
+        div > ul > li {
+            color : red;
+        }
+        div > ul > .asd > ul> li{
+            color : green;;
+        }
+        div > ul > .asd > li {
+            color: blue;
+        }
+        /* P:nth-child(k): k번째 자식이 ul태그라면 다음의 스타일을 적용해라.*/
+        /* P:nth-of-type(k): P타입의 k번째 자식에게 적용 */
+        ul > ul:nth-of-type(5) {
+            color : blue;
+        }
+
+        ul > ul:nth-of-type(2)>ul{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>리스트1</li>
+            <li>리스트2</li>
+            <ul class="a">
+                <li>하위1</li>
+                <li>하위1</li>
+                <ul>
+                    <li>최하위1</li>
+                    <li>최하위1</li>
+                </ul>
+            </ul>
+            <li>리스트3</li>
+            <ul class="asd">
+                <li>하위1</li>
+                <li>하위1</li>
+                <ul>
+                    <li>최하위1</li>
+                    <li>최하위1</li>
+                </ul>
+            </ul>
+        </ul>
+    </div>
+    </body>
+</html>

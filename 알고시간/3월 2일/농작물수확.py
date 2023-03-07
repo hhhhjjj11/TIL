@@ -20,7 +20,7 @@ for tc in range(1, T+1):
     res = 0
 
     for adj in Adj:
-        if 0 <= K + adj[0] < N and 0 <= K + adj[1] < N :
+        if 0 <= K + adj[0] < N and 0 <= K + adj[1] < N:
             res += garden[K + adj[0]][K + adj[1]]
 
     print(f'#{tc} {res}')

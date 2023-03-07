@@ -21,7 +21,7 @@ for i in range(L):
     a = int(a)
     directs.append((a,b))
 
-dir = [(-1,0), (0,1), (1,0), (0,-1)] 
+dir = [(-1,0), (0,1), (1,0), (0,-1)]
 # 시계방향.. 위 오른쪽 아래 왼쪽 인덱스기준 +1 하면 오른쪽으로 회전, -1하면 왼쪽으로 회전함.
 
 OVER = False
@@ -36,7 +36,7 @@ Hi,Hj = 0,0 # 대가리
 
 for i in range(L+1):
     if i<L:
-        direct = directs[i] 
+        direct = directs[i]
         time, rot = direct[0], direct[1] # time 이 되면 rot만큼 회전 해야함
     while True:
         tnow+=1
@@ -60,10 +60,10 @@ for i in range(L+1):
         # 지몸에 갖다 박으면
         elif board[Hi][Hj] == 'S':
             OVER = True
-            break     
-        if tnow == time : 
-           break       
-    
+            break
+        if tnow == time :
+           break
+
     if OVER:
         break
     # tnow == time 이되면 방향 바꾸기 (while문 빠져나왓으니.)
