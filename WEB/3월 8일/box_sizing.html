@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            padding : 30px;
+            border : 1px solid black;
+            background-color: purple;
+        }
+
+        .relative{
+            position:relative;
+            background-color: red;
+            top : 100px;
+            left: 100px;
+            /* position : relavive 하면 원래 시작점으로부터 top, left만큼 떨어져서 시작 */
+        }
+        .absolute{
+            position: absolute;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <span class="box"></span>
+    <div class="box"></div>
+    <span class="box"></span>
+    <!-- 위의 네모 네개가 저따구로 나오는 이유
+    일단 디브는 블락, 스팬은 인라인임
+    인라인은 다론 요소가 있든말든 배치됨
+    블락은 있으면 밀어냄 -->
+    <div class="box" style="box-sizing: border-box"></div>
+    <div id="box"></div>
+
+</body>
+</html>

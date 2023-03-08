@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            padding : 30px;
+            border : 1px solid black;
+            background-color: purple;
+        }
+        .static{
+            background-color: green;
+            top: 100px;
+            left: 100px;
+        }
+        /* relative 내가 가야할 위치로 부터 position을 세팅 */
+        .relative{
+            position:relative;
+            background-color: red;
+            top : 100px;
+            left: 100px;
+            /* position : relavive 하면 원래 시작점으로부터 top, left만큼 떨어져서 시작 */
+        }
+        /* absolute 는 부모요소의 시작점에서 시작 */
+        .absolute{
+            position: absolute;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">static</div>
+    <div class="box relative">relative</div>
+    <div class="box relative absolute">absolute</div>
+    <div class="box relative absolute">absolute</div>
+
+</body>
+</html>
