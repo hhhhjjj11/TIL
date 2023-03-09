@@ -1,0 +1,29 @@
+.container{
+    display : flex;
+    flex-direction:row;
+    /* row= 디폴트
+    row-reverse = 오른쪽가로부터쌓임
+    column =  */
+    /* flex-direction은 컨테이너에 설정ㅇ해줘야함 아이템에 설정할때는 효과 X */
+    flex-wrap: wrap;
+    /* 표시영역 넘어갈때 어떻게 처리해줄지에 대한 옵션임 (쉽게말해 줄넘김)*/
+    /* nowrap 이 기본 값.
+     */
+    justify-content: space-evenly ;
+    /* 메인축기준으로, 내용물들을 어떻게 배치할지 정하는 옵션
+    justify -> 메인축기준으로 뭔가 하겠다고 알면됨. align -> 교차축기준으로 뭔가 하겠구나 알면됨.
+    flex-end의경우! flex=direction : reverse랑 헷갈리기 쉬움! 다르다!
+
+    */
+}
+/* 플렉스박스에 딱 맞게 아이템들이 배치됨 자동으로 */
+.item{
+    width: 100px;
+    height: 100px;
+    background-color: lightgreen;
+
+    margin-top: 20px;
+    margin-right: 20px;
+
+    font-size: 50px;
+}

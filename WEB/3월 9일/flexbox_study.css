@@ -1,0 +1,139 @@
+h1 {
+    margin-bottom: 0;
+    font-size: 24px;
+}
+
+.basic-container{
+    margin-bottom: 40px;
+    padding: 10px;
+    background-color: #ccc;
+}
+
+.flex-container{
+    display:flex;
+    background-color: #ccc;
+    padding: 10px;
+    margin-bottom: 40px;
+}
+
+.flex-item{
+    width: 50px;
+    text-align: center;
+    background-color: white;
+    border: 3px solid black;
+    margin: 10px;
+    padding: 15px;
+}
+
+.flex-direction-row-reverse{
+    flex-direction: row-reverse;
+}
+
+.flex-direction-column{
+    flex-direction: column;
+}
+
+.flex-center{
+    justify-content: center;
+}
+
+.flex-justy1{
+    justify-content:space-between;
+}
+
+.flex-justy2{
+    justify-content:space-around ;
+}
+
+.flex-justy3{
+    justify-content:space-evenly;
+}
+
+.first{
+    height: 100px;
+}
+
+.second{
+    height: 50px;
+}
+
+.third{
+    height: 20px;
+}
+
+/* 줄바꿈 관련 설정 */
+.wrap{
+    flex-wrap: wrap;
+}
+.nowrap{
+    flex-wrap: nowrap;
+}
+.wrap-reverse{
+    flex-wrap: wrap-reverse;
+}
+
+/* grow: 컨테이너가 아이템의 길이보다 클때 채워넣기
+기본값 = 0, 아이템 본연의 크기를 유지
+1이상의 숫자를 넣으면 유연하게 늘어남.
+비율을 너무 극단적으로는 사용하지 말자.
+자식 요소의 인라인 크기보다 작도록 하지 말자(?)
+*/
+
+.grow{
+    flex-grow: 3;
+}
+
+.grow1{
+    flex-grow: 1;
+}
+
+.grow2{
+    flex-grow: 4;
+}
+
+.grow3{
+    flex-grow: 2;
+}
+
+.shrink{
+    flex-shrink: 0;
+}
+
+.shrink1{
+    flex-shrink: 1;
+}
+
+.shrink2{
+    flex-shrink: 2;
+}
+
+.shrink3{
+    flex-shrink: 3;
+}
+
+.flex-basis{
+    flex-basis: 100px;
+}
+
+/* flex 에 배치될 아이템의 순서를 결정
+숫자가 적을수록 앞 쪽에 배치
+소수점도 가능
+동일한 숫자의 경우, DOM 기준으로 배치
+DOM 기준: 코드가 먼저 작성된 순서를 의미함. */
+.order3{
+    order: 1
+}
+
+.order1{
+    order:2
+}
+
+.order2{
+    order:3
+}
+
+
+/* 남은 우측 공간을 모두 마진으로 설정함!! */
+.margin-right{
+    margin-right: auto;
+}

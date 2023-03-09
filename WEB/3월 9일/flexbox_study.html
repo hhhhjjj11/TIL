@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="flexbox_study.css">
+</head>
+<body>
+    <h1>기본 박스</h1>
+    <div class="basic-container">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+    </div>
+
+    <h1>flex</h1>
+    <div class="flex-container">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+    </div>
+    <h1>flex-direction-row-reverse</h1>
+    <div class="flex-container flex-direction-row-reverse">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+    </div>
+    <h1>flex-direction-column</h1>
+    <div class="flex-container flex-direction-column">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+    </div>
+    <h1>flex-direction-center</h1>
+    <div class="flex-container flex-center">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+    </div>
+    <h1>flex-direction-예제1(space-between)</h1>
+    <!-- 아이템들 사이간격만 일정하게. 양끝은 신경안씀 그래서 양끝은 경계에 딱 붙음. -->
+    <div class="flex-container flex-justy1">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+    </div>
+    <h1>flex-direction-예제2(space-around)</h1>
+<!-- 각 아이템의 양옆을 일정하게 그래서 사이 간격이 양끝 공간의 두배임. -->
+    <div class="flex-container flex-justy2">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+    </div>
+    <h1>flex-direction-예제3(space-evenly)</h1>
+<!-- 양끝과 사의 모두 동일한 여백을 갖도록. -->
+    <div class="flex-container flex-justy3">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+    </div>
+
+    <!-- 이제 align 해보자!!! -->
+    <h1>아이템높이가 다르면 어떨까?</h1>
+    <div class="flex-container">
+        <div class="flex-item first">1</div>
+        <div class="flex-item second">2</div>
+        <div class="flex-item third">3</div>
+    </div>
+
+    <h1>줄바꿈하지않으면?!</h1>
+    <div class="flex-container" style="width:300px">
+        <div class="flex-item ">1</div>
+        <div class="flex-item ">2</div>
+        <div class="flex-item ">3</div>
+        <div class="flex-item ">4</div>
+        <div class="flex-item ">5</div>
+    </div>
+    <h1>크기유지+줄바꿈하기(flex-wrap: wrap)</h1>
+    <div class="flex-container wrap" style="width:300px">
+        <div class="flex-item ">1</div>
+        <div class="flex-item ">2</div>
+        <div class="flex-item ">3</div>
+        <div class="flex-item ">4</div>
+        <div class="flex-item ">5</div>
+    </div>
+
+    </div>
+    <h1>줄바꿈 + 역정렬(flex-wrap: wrap-reverse)</h1>
+    <div class="flex-container wrap-reverse" style="width:300px">
+        <div class="flex-item ">1</div>
+        <div class="flex-item ">2</div>
+        <div class="flex-item ">3</div>
+        <div class="flex-item ">4</div>
+        <div class="flex-item ">5</div>
+    </div>
+
+    <h1>확대 - 모든 아이템 크기를 동일하게</h1>
+    <div class="flex-container">
+        <div class="flex-item grow">1</div>
+        <div class="flex-item grow">2</div>
+        <div class="flex-item grow">3</div>
+    </div>
+
+    <h1>확대 - 아이템 크기별로</h1>
+    <div class="flex-container">
+        <div class="flex-item grow1">1</div>
+        <div class="flex-item grow2">2</div>
+        <div class="flex-item grow3">3</div>
+    </div>
+
+
+    <h1>확대 - 가운데 비어 보이게 하면서 비율주는 방법?</h1>
+    <!-- 가운데 태그에서 보이는 부분(클래스나 값등) 지워주면 그만ㅋ -->
+    <div class="flex-container">
+        <div class="flex-item grow1">1</div>
+        <div class="grow2"></div>
+        <div class="flex-item grow3">3</div>
+    </div>
+
+    <h1>축소 - 축소전</h1>
+    <div class="flex-container" style="width:300px">
+        <div class="flex-item shrink" style="width:200px">1</div>
+        <div class="flex-item shrink" style="width:200px">2</div>
+        <div class="flex-item shrink" style="width:200px">3</div>
+    </div>
+
+    <h1>축소 - flex-shrink, 다 똑같이 작게</h1>
+    <div class="flex-container" style="width:300px">
+        <div class="flex-item shrink1" style="width:200px">1</div>
+        <div class="flex-item shrink1" style="width:200px">2</div>
+        <div class="flex-item shrink1" style="width:200px">3</div>
+    </div>
+
+    <h1>축소 - flex-shrink, 다르게 작게</h1>
+    <div class="flex-container" style="width:300px">
+        <div class="flex-item shrink1" style="width:150px">1</div>
+        <div class="flex-item shrink2" style="width:150px">2</div>
+        <div class="flex-item shrink3" style="width:150px">3</div>
+    </div>
+
+    <h1>특이한 경우 - flex-basis</h1>
+    <div class="flex-container" style="width:300px">
+        <div class="flex-item" style="width:300px">1</div>
+        <div class="flex-item" style="width:150px">2</div>
+        <div class="flex-item" style="width:400px">3</div>
+    </div>
+
+    <h1>순서 변경</h1>
+    <div class="flex-container" style="width:300px">
+        <div class="flex-item order1">1</div>
+        <div class="flex-item order2">2</div>
+        <div class="flex-item order3">3번이 앞에</div>
+    </div>
+
+    <h1>margin-right를 이용하여 한쪽으로 밀어버리기!</h1>
+    <div class="flex-container" >
+        <div class="flex-item">1</div>
+        <div class="flex-item margin-right">2</div>
+        <div class="flex-item">우측배치1</div>
+        <div class="flex-item">우측배치2</div>
+        <div class="flex-item">우측배치3</div>
+    </div>
+
+</body>
+</html>

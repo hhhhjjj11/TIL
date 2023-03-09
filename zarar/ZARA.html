@@ -7,41 +7,75 @@
     <title>Document</title>
     <style>
         .container{
-            width: 500px;
-            height: 1000px;
             display:flex;
-            flex-direction: row;
-            justify-content: space-evenly;
         }
-        image{
-            justify-content: center;
-            align-items: center;
+        .sticky{
+            position : sticky;
+            top: 20px;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            background-color: #CCC;
+        }
+        .small{
+            width: 30px;
+            height: 30px;
+            background-color: #CCC;
+            margin-left: 10px
+        }
+        .nav{
+            margin-top:65px;
+            margin-left:10px;
+            font-size:14px;
+        }
+        .str-clothes{
+            font-size: 13px;
+        }
+        .space-evenly{
+            justify-content: space-evenly;
         }
     </style>
 </head>
 <body>
-    <header>
 
-    </header>
+    <div class="container sticky" style="height:180px; border:1px solid #CCC;">
+        <div class="small"></div>
+        <img src="logo.PNG" style="height:50%; margin-left:30px;"></p>
+        <div class="container space-evenly" style="width:50%">
+            <p class="nav">모두 보기</p>
+            <p class="nav">치노</p>
+            <p class="nav">조거</p>
+            <p class="nav">카고 | 파라슈트</p>
+            <p class="nav">슈트 팬츠 | 슬랙스</p>
+            <p class="nav">LINEN</p>
+        </div>
+        <div class="container">
+
+        </div>
+
+    </div>
+
     <section>
         <div class ='container'>
             <div class= 'item'>
                 <a><img src="pants1.PNG" alt ="pants"></a>
-                턱 디테일 스트레이트 팬츠
+                <p class="str-clothes">턱 디테일 스트레이트 팬츠</p>
             </div>
             <div class = 'item'>
-                <a><img src="pants2.PNG" alt ="pants"></a>
-                턱 디테일 스트레이트 팬츠
+                <a><img src="pants1.PNG" alt ="pants"></a>
+                <p class="str-clothes">턱 디테일 스트레이트 팬츠</p>
             </div>
             <div class = 'item'>
-                <a><img src="pants3.PNG" alt ="pants"></a>
-                콘트라스트 스티치 팬츠
+                <a><img src="pants1.PNG" alt ="pants"></a>
+                <p class="str-clothes">콘트라스트 스티치 팬츠</p>
             </div>
             <div class = 'item'>
-                <a><img src="pants4.PNG" alt ="pants"></a>
-                콘트라스트 스티치 팬츠
+                <a><img src="pants1.PNG" alt ="pants"></a>
+                <p class="str-clothes">콘트라스트 스티치 팬츠</p>
             </div>
         </div>
+        <div class="box"></div>
     </section>
     <footer>
 

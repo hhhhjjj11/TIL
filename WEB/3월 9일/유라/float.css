@@ -1,0 +1,10 @@
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: orangered;
+
+    /* 박스 인라인으로 감싸기 */
+    float: left;
+    /* 오른쪽 여백 만들어주기 */
+    margin-right: 20px;
+}

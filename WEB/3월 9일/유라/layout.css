@@ -1,0 +1,43 @@
+/*
+1. 일단 각각 클래스 높이주고
+2. left랑 right width 퍼센트 설정해주고
+3. float줘서 left right 한 행에 오도록
+-> 그러면 normal flow기준 헤더 다음이 비어있으므로 푸터가 헤더다음에옴.
+-> float맥여논 left랑 right에 푸터가 가려지게 됨!!
+Q. 그러면 어칼까?
+- 그 다음 것도 계속 플롯 쓰면 되는ㄱ ㅓ아ㅣㄴㅁ?
+-> 근데 그러면 계속 떠있으니까 그렇게 안하겟죠?
+-> 그다음에 올 footer에 clear: both 해주면 됨
+
+그치만! 플롯보다 더 좋은게 있다 ~
+플롯을 쓰면 문제점 : 애들이 다 떠버리니까 노멀플로우로 붙어서 가려지는 문제가있다 ~
+그런 문제를 해결하는 방법은 clear:both 다~~
+알고있으면 됨.
+플롯 요정도만 알고 있으면 됨. 요샌 플롯 말고 flex나 grid쓴다~
+*/
+.header{
+    height: 100px;
+    background-color: aquamarine;
+}
+
+.section-left{
+    height: 500px;
+    background-color: bisque;
+    width: 30%;
+}
+
+.section-right{
+    height: 500px;
+    background-color: skyblue;
+    width: 70%;
+}
+
+.footer{
+    height: 100px;
+    background-color: yellowgreen;
+    clear: both
+}
+
+.left{
+    float : left
+}

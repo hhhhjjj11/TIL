@@ -1,0 +1,53 @@
+.container{
+    background-color: cadetblue;
+    height: 300px;
+    display: flex;
+
+    align-items: baseline;
+    /* 교차축기준으로 아이템들을 어떻게 정렬할지 정해주는 옵션임.  */
+    /* align-items: flex-end VS flex-direction: row-reverse 차이 잘 알고있기
+    전자는 :[     12345]
+    후자는 :[     54321]
+    */
+    align-content:center ;
+    /* align-contetn는 여러줄로들어갈때만 쓰는거임. 한줄일때는 효과 없음
+    여러줄을 배치할때, 각 줄들을 교차축 기준으로 어떻게 배치할지를 정해주는 옵션.
+    */
+}
+/* flex를 주는 순간 높이는 컨테이너에 맞춰진다...(근데 따로 지정하면 지정한대로되긴하는듯) */
+.item{
+    background-color: lawngreen;
+    border : 1px solid black;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.small{
+    font-size:30px;
+}
+
+.big{
+    font-size: 50px;
+}
+
+/* 아이템들의 순서를 옵션으로 직접 지정할 수도 있다. */
+.order1{
+    order:1
+}
+.order2{
+    order:2
+}
+.order3{
+    order:3
+}
+
+/* 컨테이너가 늘어남에 따라 아이템도 같이 늘어나게 하기 */
+.grow-1{
+    flex-grow:1
+}
+.grow-2{
+    flex-grow:2
+}
+.grow-3{
+    flex-grow:3
+}
