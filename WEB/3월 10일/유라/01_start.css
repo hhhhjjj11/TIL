@@ -1,0 +1,42 @@
+.circle{
+    width: 100px;
+    height: 100px;
+    border-radius:50%;
+}
+
+.rect{
+    width: 100px;
+    height: 100px;
+}
+
+.red{
+    background-color: red;
+}
+
+.green{
+    background-color: green;
+}
+
+.blue{
+    background-color: blue;
+}
+
+.sm{
+    width: 50%;
+    height: 50%;
+}
+
+.lg{
+    width: 150%;
+    height: 150%;
+}
+
+/* 이름을 정하고 가져올 url을 적은다음에
+font-family에서 선택해서 쓸 수 있음.
+파일이 아니라 링크로 제공한다는 점.
+구글링: '웹 폰트 CDN' 해서 씀.
+*/
+@font-face {
+    font-family: '짱이쁜 폰트';
+    src: url();
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <style>
+      .container {
+        display: flex;
+        /* align-items: center; */
+        flex-direction: column;
+      }
+      .box {
+        border: 2px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="bg-danger">
+        <p class="py-3 ms-3 text-white">Invalid Login or password.</p>
+      </div>
+      <p class="fs-1 mt-3 fw-bold">SSAFY전용 GitLab 시스템</p>
+      <div style="border: 1px solid #ccc;"></div>
+      <div class="container box mt-3">
+        <form class="container" action="">
+          <p class="fw-bold fs-3 mt-4 text-center">Sign in</p>
+          <div style="border: 2px solid navy;"></div>
+          <label class="mt-3 fs-4 fw-bold text-start" for="username"
+            >username or email</label
+          >
+          <input
+            class="mt-2 shadow-none p-3 mb-3 bg-light rounded"
+            type="text"
+            id="username"
+          />
+          <label class="mt-1 fs-4 fw-bold" for="pw">password</label>
+          <input
+            class="mt-2 shadow-none p-3 mb-3 bg-light rounded"
+            type="text"
+            id="pw"
+          />
+          <div class="my-3 d-flex justify-content-between">
+            <div class="d-flex">
+              <input type="checkbox" />
+              <p class="ms-2 fs-5 fw-bold" style="margin: auto;">Remember me</p>
+            </div>
+            <div class="fw-bold fs-5" style="color: rgb(87, 155, 245)">
+              Forgot your password?
+            </div>
+          </div>
+          <input
+            type="submit"
+            value="Sign in"
+            class="fs-4 bg-success py-3 border mb-3"
+            style="
+              border-radius: 10px;
+              color: aliceblue;
+            "
+          />
+        </form>
+      </div>
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
