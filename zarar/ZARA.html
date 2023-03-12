@@ -1,84 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        .container{
-            display:flex;
-        }
-        .sticky{
-            position : sticky;
-            top: 20px;
-        }
-        .box{
-            width: 300px;
-            height: 300px;
-            background-color: #CCC;
-        }
-        .small{
-            width: 30px;
-            height: 30px;
-            background-color: #CCC;
-            margin-left: 10px
-        }
-        .nav{
-            margin-top:65px;
-            margin-left:10px;
-            font-size:14px;
-        }
-        .str-clothes{
-            font-size: 13px;
-        }
-        .space-evenly{
-            justify-content: space-evenly;
-        }
+      .d-flex {
+        display: flex;
+      }
+      /* flex-direction */
+      .column {
+        flex-direction: column;
+      }
+      /* justify-content */
+      .space-between {
+        justify-content: space-between;
+      }
+      .justify-end {
+        justify-content: end;
+      }
+      .box {
+        border: 1px solid black;
+      }
+      .big {
+        width: 200px;
+        height: 200px;
+        background-color: #ccc;
+        margin: 10px;
+      }
+      .small {
+        width: 20px;
+        height: 20px;
+        border: 1px solid black;
+      }
+      .letter {
+        margin: 5px;
+        font-size: 11px;
+        margin: 0 15px;
+      }
+      .align-end {
+        align-items: end;
+      }
+      .align-center {
+        align-items: center;
+      }
+      .border {
+        border: 1px solid black;
+      }
+
+      .sticky {
+        position: sticky;
+        top: 10px;
+      }
     </style>
-</head>
-<body>
-
-    <div class="container sticky" style="height:180px; border:1px solid #CCC;">
-        <div class="small"></div>
-        <img src="logo.PNG" style="height:50%; margin-left:30px;"></p>
-        <div class="container space-evenly" style="width:50%">
-            <p class="nav">모두 보기</p>
-            <p class="nav">치노</p>
-            <p class="nav">조거</p>
-            <p class="nav">카고 | 파라슈트</p>
-            <p class="nav">슈트 팬츠 | 슬랙스</p>
-            <p class="nav">LINEN</p>
+  </head>
+  <body>
+    <div class="d-flex box space-between sticky" style="height: 130px">
+      <div class="d-flex box align-center" style="width: 100px">
+        <div class="logo">ZARA</div>
+      </div>
+      <div class="d-flex box align-end">
+        <p class="letter">모두 보기</p>
+        <p class="letter">치노</p>
+        <p class="letter">조거</p>
+        <p class="letter">카고|파라슈트</p>
+        <p class="letter">슈트팬츠|슬랙스</p>
+        <p class="letter">LINEN</p>
+      </div>
+      <div class="d-flex box">
+        <div style="margin-right: 100px">
+          <input type="text" value="검색" style="width: 45px" />
         </div>
-        <div class="container">
-
+        <div class="d-flex column space-between">
+          <div class="d-flex">
+            <p class="letter">로그인</p>
+            <p class="letter">도움말</p>
+            <div class="small"></div>
+          </div>
+          <div class="d-flex justify-end">
+            <div class="border letter">FILTERS</div>
+            <div class="small"></div>
+          </div>
         </div>
-
+      </div>
     </div>
-
-    <section>
-        <div class ='container'>
-            <div class= 'item'>
-                <a><img src="pants1.PNG" alt ="pants"></a>
-                <p class="str-clothes">턱 디테일 스트레이트 팬츠</p>
-            </div>
-            <div class = 'item'>
-                <a><img src="pants1.PNG" alt ="pants"></a>
-                <p class="str-clothes">턱 디테일 스트레이트 팬츠</p>
-            </div>
-            <div class = 'item'>
-                <a><img src="pants1.PNG" alt ="pants"></a>
-                <p class="str-clothes">콘트라스트 스티치 팬츠</p>
-            </div>
-            <div class = 'item'>
-                <a><img src="pants1.PNG" alt ="pants"></a>
-                <p class="str-clothes">콘트라스트 스티치 팬츠</p>
-            </div>
-        </div>
-        <div class="box"></div>
-    </section>
-    <footer>
-
-    </footer>
-</body>
+    <div class="big"></div>
+    <div class="big"></div>
+    <div class="big"></div>
+    <div class="big"></div>
+    <div class="big"></div>
+    <div class="big"></div>
+    <div class="big"></div>
+    <div class="big"></div>
+    <div class="big"></div>
+    <div class="big"></div>
+  </body>
 </html>
