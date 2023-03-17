@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="01_nav_footer.css">
+  <link rel="stylesheet" href="03_community.css">
+  <title>Community</title>
+  <script>
+    window.onload = function() {
+
+function onClick() {
+    document.querySelector('.modal').style.display ='block';
+}
+function offClick() {
+    document.querySelector('.modal').style.display ='none';
+
+}
+document.getElementById('loginbutton').addEventListener('click', onClick);
+document.getElementById('closebutton').addEventListener('click', offClick);
+document.getElementById('closebutton2').addEventListener('click', offClick);
+};
+</script>
+  <style>
+    .sticky-bottom{
+      position:sticky;
+      bottom:0px;
+    }
+.box2{
+
+  border:1px solid #CCC;
+  margin: 10px;
+}
+
+
+
+@media (max-width: 992px) {
+  .AAA{
+    display: none
+}
+}
+
+@media(min-width:992px){
+  .aaa{
+    display:none
+  }
+}
+
+  </style>
+</head>
+<body >
+  <!-- 01_nav_footer에서 작성한 Navigation bar & Modal & Footer 코드를 적절한 위치에 사용합니다. -->
+<!-- Nav -->
+<nav class = "sticky" id ="NAV">
+  <nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+       <a class="navbar-brand text-white" href="02_home.html"><img src="./images/logo.png" alt="logo" style = "width:60px; height:40px"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="02_home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="03_community.html">Community</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" id ="loginbutton" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Login
+            </a>
+          </li>
+
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</nav>
+
+<!-- 모달 -->
+<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closebutton2"></button>
+      </div>
+      <div class="modal-body">
+
+        <form action="">
+          <div class=" d-flex" style="flex-direction: column;">
+            <label for="email">Email Address</label>
+            <input type="text" name="email">
+            <p style="color: #CCC"> We will never share your email address with anyone else</p>
+          </div>
+          <div class=" d-flex " style="flex-direction: column;">
+            <label for="password">Password</label>
+            <input type="text" name="password">
+          </div>
+          <div class="d-flex ">
+            <input class= "my-auto" type="checkbox"> <p  class= "ms-2 my-auto">check me out</p>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closebutton">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- 03_community.html -->
+
+<div class="container">
+  <h1>Community</h1>
+  <div class="row">
+      <!-- Aside - 게시판 목록 -->
+    <div class="col-lg-2" >
+      <div id="list-example" class="list-group">
+        <a class="list-group-item list-group-item-action" href="#list-item-1">Item 1</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-2">Item 2</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-3">Item 3</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-4">Item 4</a>
+      </div>
+    </div>
+      <!-- Section - 게시판 -->
+    <div class="AAA col-lg-10">
+      <table class="table ">
+        <thead>
+          <tr>
+            <th scope="col">영화제목</th>
+            <th scope="col">글제목</th>
+            <th scope="col">작성자</th>
+            <th scope="col">작성시간</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="aaa">
+      <div class="box2">
+        <a href="#" style="text-decoration: none; color:black"><p class="fs-2">Best Movie Ever</p></a>
+        <a href="#" style="text-decoration: none; color:black"><p class="fs-4">Great Movie Title</p></a>
+        <a href="#" style="text-decoration: none; color:black"><p class="">user</p></a>
+        <a href="#" style="text-decoration: none; color:black"><p class="">1 minute ago</p></a>
+      </div>
+      <div class="box2">
+        <a href="#" style="text-decoration: none; color:black"><p class="fs-2">Best Movie Ever</p></a>
+        <a href="#" style="text-decoration: none; color:black"><p class="fs-4">Great Movie Title</p></a>
+        <a href="#" style="text-decoration: none; color:black"><p class="">user</p></a>
+        <a href="#" style="text-decoration: none; color:black"><p class="">1 minute ago</p></a>
+      </div>
+      <div class="box2">
+        <a href="#" style="text-decoration: none; color:black"><p class="fs-2">Best Movie Ever</p></a>
+        <a href="#" style="text-decoration: none; color:black"><p class="fs-4">Great Movie Title</p></a>
+        <a href="#" style="text-decoration: none; color:black"><p class="">user</p></a>
+        <a href="#" style="text-decoration: none; color:black"><p class="">1 minute ago</p></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 페이지네이션 -->
+<div class="d-flex justify-content-center">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+
+<!-- Footer  -->
+<div class="d-flex justify-content-center">
+  <footer  class="fs-4"style="
+  position: fixed;bottom: 10px;
+   color:#CCC">
+  Web-bootstrap PJT, by HeoJae
+  </footer>
+</div>
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>
