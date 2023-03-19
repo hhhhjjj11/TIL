@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block block1 %}
+<form action="/app1/new/" , method="post">
+  {% csrf_token %}
+  <div>
+    <label for="title">제목</label>
+    <input type="text" , name="title" />
+  </div>
+  <div>
+    <label for="content">내용</label>
+    <input type="text" , name="content" />
+  </div>
+  <input type="submit" value="던지기!" />
+</form>
+{% endblock %}

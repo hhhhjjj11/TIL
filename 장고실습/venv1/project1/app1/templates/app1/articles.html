@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block block1 %}
+
+<h1>전체조회 페이지</h1>
+
+{{articles}} {% for article in articles %}
+<p>글번호 : {{article.id}}</p>
+<p>제목 : {{article.title}}</p>
+<p>내용 : {{article.content}}</p>
+<p>내용2 : {{article.content2}}</p>
+<hr />
+{% endfor %} {% endblock block1 %}

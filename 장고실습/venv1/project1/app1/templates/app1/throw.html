@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block block1 %}
+<form action="/app1/catch/" , method="post">
+  {% csrf_token %}
+  <div>
+    <label for="throw">던질내용</label>
+    <input type="text" , name="throw" />
+  </div>
+  <input type="submit" value="던지기!" />
+</form>
+{% endblock %}
