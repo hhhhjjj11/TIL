@@ -4,16 +4,7 @@
 </br>
 <form action={% url 'articles:create' %} method = 'post'>
     {% csrf_token %}
-    <div>
-        <label for="title">제목</label>
-        <input type="text" name='title'>
-    </div>
-</br>
-    <div>
-        <label for="content">내용</label>
-        <input type="text" name='content'>
-    </div>
-</br>
+  {{form.as_p}}
     <input type="submit">
 </form>
 {% endblock content %}
