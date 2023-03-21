@@ -8,3 +8,6 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     # auto_now : 생성 시 + 수정 시에 현재 시간을 저장
     updated_at = models.DateTimeField(auto_now=True)
+
+    image = models.ImageField(blank=True, upload_to='articles/%Y%m%d')
+    # blank = True : null값을 허용함

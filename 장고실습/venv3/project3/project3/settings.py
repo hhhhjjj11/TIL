@@ -123,6 +123,13 @@ STATICFILES_DIRS = [
     BASE_DIR/'static'
 ]
 
+# 1. 사용자가 업로드한 파일을 저장하는 경로
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# 2. URL 설정
+MEDIA_URL = '/media/'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

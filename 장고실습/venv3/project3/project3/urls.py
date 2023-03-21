@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# static 설정을 위한 import
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('articles/', include('articles.urls')),
-]
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+# 의미: 첫번째 인자가 요청주소이고 두번째 인자가 저장위치를 지정하는 것.
