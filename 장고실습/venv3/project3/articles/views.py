@@ -66,4 +66,4 @@ def update(req, pk):
         #     'article': article
         # }
     context = {'form': form}
-    return render(req, 'articles/update.html', context)
+    return render(req, 'articles/update.html', context) 
