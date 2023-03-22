@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>INDEX</h1>
+<a href="{% url 'app1:create' %}">글 생성하기</a>
+
+{% if user.is_authenticated %}
+<div>
+    <a href="{% url 'accounts:logout' %}"><button>로그아웃</button></a>
+</div>
+
+{% endif %}
+
+{% endblock content %}
