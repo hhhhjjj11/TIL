@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="{% url 'app1:create' %}" method="POST"></form>
+{% csrf_token %}
+<label for="title">제목</label>
+<input type="text">
+<input type="submit">
+{% endblock content %}
+<form action="{% url '' %}" method="POST"></form>
