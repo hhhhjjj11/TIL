@@ -31,7 +31,6 @@ def create(req):
         context = {'form': form }
         return render(req, 'articles/create.html', context)
 
-
 def detail(req, pk):
     article = Article.objects.get(pk=pk)
     # 삭제
@@ -49,7 +48,7 @@ def update(req, pk):
     article = Article.objects.get(pk=pk)
     # 수정요청시
     if req.method == 'POST':
-        form = ArticleModelForm(req.POST, instance = article)
+        form = ArticleModelForm(req.POST, req.FILES, instance = article)
         if form.is_valid():
             form.save()
             return redirect('article:detail', pk=article.pk)
@@ -66,4 +65,4 @@ def update(req, pk):
         #     'article': article
         # }
     context = {'form': form}
-    return render(req, 'articles/update.html', context) 
+    return render(req, 'articles/update.html', context)
