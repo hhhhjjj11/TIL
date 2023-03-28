@@ -18,7 +18,7 @@ for tc in range(1,T+1):
     N = int(input())
     li = [list(map(int,input().split())) for _ in range(N)]
     res = 0
-    p = list(range(2,N+1))
+    p = list(range(2,N+1)) # 1  (2,3,,,N)  1
     min = 10000000
     permf(0, N-1)
     #print('perms',perms)

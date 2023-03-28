@@ -11,3 +11,4 @@ def f(i,k):
             p[i],p[j]=p[j],p[i]
 
 f(0,N)
+
