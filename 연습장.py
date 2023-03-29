@@ -1,36 +1,27 @@
-arr = [12,3,4,55,66,33]
+X, Y = map(int,input().split())
 
-def merge_sort(low, high):
-    if high - low < 2:  #왜 2인지 모르겠다. 1이어야 할 것 같은데.
-        return
-    mid = (low + high) // 2
-    merge_sort(low, mid)
-    merge_sort(mid, high)
+Znow = (Y*100)//X
 
-    temp = []
-    l, h = low, mid
+if Znow >= 99:
+    print(-1)
 
-    while l < mid and h < high:
-        if arr[l] < arr[h]:
-            temp.append(arr[l])
-            l += 1
-        else:
-            temp.append(arr[h])
-            h += 1
+else:
+    answer = 0
+    left = 1
+    right = X
 
-    while l < mid:
-        temp.append(arr[l])
-        l += 1
-    while h < high:
-        temp.append(arr[h])
-        h += 1
+    while left<=right:
+        mid = (left+right)//2
+        if (Y+mid)*100 // (X+mid) == Znow:
+            left = mid + 1
+        else:                               # 값이 변한 경우
+            answer = mid                    # 일단 정답후보로 걸어놓고 더 작아도 변하는지 찾아줘야댐
+            right = mid - 1                 # 더 작아도 변하는지 확인하기 위해서 탐색을 계속해나가야함.   
 
-    # 이렇게 하면 모든 정렬이 끝난 것이고
-    # 이제 temp에 있는거를 순서대로 arr[low] 부터 arr[high]까지 넣어주면 된다.
+    print(answer)
 
-    for i in range(low, high):
-        arr[i] = temp[i - low]
-
-
-merge_sort(0,len(arr))
-print(arr)
+# 설명
+# 전체 = X 승률 98 -> 이긴수 0..98X
+# 승률 1.98X /2X = 99퍼 
+# 따라서 승률에 관계없이 여태까지 한 판수만큼 이기면 승률은 무조건오름
+# 따라서 1~X 범위에서 탐색해주면 된다.
