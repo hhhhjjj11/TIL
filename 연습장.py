@@ -5,3 +5,4 @@ for i in li:
         print(i,li.count(i))
         print('중복')
         break
+
