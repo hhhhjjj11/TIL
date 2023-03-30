@@ -33,7 +33,7 @@ for tc in range(1, T+1):
             temp += li[k][perm[k]]
             if temp > m:
                 break
-        if temp < m:
+        if temp <= m:
             m = temp
 
     print(f'#{tc} {m}')

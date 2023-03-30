@@ -1,27 +1,39 @@
-X, Y = map(int,input().split())
+T = int(input())
 
-Znow = (Y*100)//X
+for tc in range(1,T+1):
 
-if Znow >= 99:
-    print(-1)
+    N = int(input())
+    li = [list(map(int,input().split())) for _ in range(N)]
 
-else:
-    answer = 0
-    left = 1
-    right = X
+    p = list(range(N)) # 0 ~ N-1
 
-    while left<=right:
-        mid = (left+right)//2
-        if (Y+mid)*100 // (X+mid) == Znow:
-            left = mid + 1
-        else:                               # 값이 변한 경우
-            answer = mid                    # 일단 정답후보로 걸어놓고 더 작아도 변하는지 찾아줘야댐
-            right = mid - 1                 # 더 작아도 변하는지 확인하기 위해서 탐색을 계속해나가야함.   
+    stack = [[value]  for value in p]
+    stack2 = [(li[0][value]/100) for value in p]
+    perms = []
 
-    print(answer)
+    M = 0
 
-# 설명
-# 전체 = X 승률 98 -> 이긴수 0..98X
-# 승률 1.98X /2X = 99퍼 
-# 따라서 승률에 관계없이 여태까지 한 판수만큼 이기면 승률은 무조건오름
-# 따라서 1~X 범위에서 탐색해주면 된다.
+    while stack:
+        per = stack.pop() # 순열, 사용한인덱스
+        temp = stack2.pop()
+        #print('꺼냄',per,temp)
+        if len(per) == len(p):
+            if temp > M:
+                #print('M=temp')
+                M = temp
+                #print('M',M)
+        else:
+            for i in range(N):
+                if not i in per:
+                    # 0부터 N-1까지 중에 per에 없으면
+                    # 0 2 1
+                    #print('i','temp',i,temp)
+                    if M > temp * ((li[len(per)][i])/100):
+                        continue
+                    else:
+                        stack.append(per + [i])
+                        stack2.append(temp * ((li[len(per)][i])/100))
+                        break
+
+    print(f'#{tc}',end=' ')
+    print("{:.6f}".format(M*100))
