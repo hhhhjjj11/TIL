@@ -1,51 +1,40 @@
-import re
 
-N = int(input())
+li = [1, 2, 3, 24, 666, 4, 434, 3, 355, 544, 3333, 566, 4]
 
-def merge_sort(low, high):
-
-    if high-low < 2:
+def merge_sort(s,e):
+    if s == e:
         return
+    
+    mid = (s+e)//2
 
-    mid = (low + high)//2
-
-    merge_sort(low, mid)
-    merge_sort(mid, high)
+    merge_sort(s,mid)
+    merge_sort(mid+1, e)
+    
+    cur1 = s
+    cur2 = mid+1
 
     temp = []
 
-    l, h = low, mid
+    while cur1<=mid and cur2<=e:
+        if li[cur1] <= li[cur2]:
+            temp.append(li[cur1])
+            cur1+=1
+        else:
+            temp.append(li[cur2])
+            cur2+=1
+    
+    while cur1<=mid:
+        temp.append(li[cur1])
+        cur1 += 1
 
-    while l < mid and h < high:
-        if len(serials[l]) < len(serials[h]):
-            temp.append(serials[l])
-            l += 1
-        elif len(serials[l]) > len(serials[h]):
-            temp.append(serials[h])
-            h += 1
-        # 길이가 같으면 다음 조건으로 넘어가야 함
-        elif len(serials[l]) == len(serials[h]):
-            # 숫자를 더한다..
-            numbers1 = re.sub(r'[^0-9]', '', serials[l])
-            numbers
-    while l < mid:
-        temp.append(serials[l])
-        l += 1
+    while cur2<=e:
+        temp.append(li[cur2])
+        cur2 += 1
+    
+    for i in range(s,e+1):
+        li[i] = temp[i-s]
+    
 
-    while h < high:
-        temp.append(serials[h])
-        h += 1
+merge_sort(0,len(li)-1)
 
-    for i in range(low,high):
-        serials[i] = temp[i-low]
-
-
-serials = []
-
-for _ in range(N):
-    serials.append(input())
-
-merge_sort(serials)
-
-for serial in serials:
-    print(serial)
+print(li)
