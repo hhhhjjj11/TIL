@@ -11,12 +11,10 @@ def findrep(i):
     if rep[i] == i:
         return i
     else:
-        rep[i] = findrep(rep[i])
-        return rep[i]
+        return findrep(rep[i])
     
 def union(i,j):
-    rep_num = findrep(i)
-    rep[j] = rep_num
+    rep[findrep(j)] = findrep(i)
 
 for tc in range(1,int(input())+1):
     N, M = map(int,input().split())
