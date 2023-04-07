@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<img src="{% static 'movies/header.jpg' %}" alt="mainimage">
+<h1>INDEX</h1>
+{% if user.is_authenticated %}
+<a href="{% url 'movies:create' %}">영화생성하기</a>
+{% endif %}
+
+<hr>
+{% for movie in movies %}
+<p><a href="{% url 'movies:detail' movie.pk %}">{{movie.title}}</a></p>
+<p>{{movie.score}}</p>
+<hr>
+{% endfor %}
+{% endblock content %}

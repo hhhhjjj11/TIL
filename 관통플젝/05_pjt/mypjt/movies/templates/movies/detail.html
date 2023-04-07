@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card" style="width: 18rem;">
+    {% if movie.actor_image %}
+    <img src="{{movie.actor_image.url}}" alt="sdf">
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">제목 : {{movie.title}}</h5>
+      <p class="card-text">평점 : {{movie.score}}</p>
+      <p class="card-text">관객 : {{movie.audience}}</p>
+    <p class="card-text">개봉일 : {{movie.release_data}}</p>
+    <p class="card-text">장르 : {{movie.genre}}</p>
+    <p class="card-text">포스터URL : {{movie.poster_url}}</p>
+    <p class="card-text">description : {{movie.description}}</p>
+    {% if user.is_authenticated %}
+      <a href="{% url 'movies:update' movie.pk %}"><button>수정페이지가기</button></a>
+<form action="{% url 'movies:delete' movie.pk %}" method="POST">
+    {% csrf_token %}<input type="submit" value="삭제하기"></form>
+    {% endif %}
+<a href="{% url 'movies:index' %}"><button>목록으로돌아가기</button></a>
+    </div>
+  </div>
+
+
+
+
+{% endblock content %}
