@@ -10,44 +10,34 @@ tracemalloc.start()
 st = time.time()
 mod = 1000000007
 # 코드 시작
-from collections import deque
+import sys
+sys.setrecursionlimit(10**6)
 
 N = int(input())
 
-li = [list(map(int,input().split())) for _ in range(N)]
+# DP ={}
 
-deck = deque([['R',1, li[0][0]],['G',1, li[0][1]],['B',1,li[0][2]]])
-# 마지막 색상(동시에 커서), 고려한갯수, 가중치
+# # 1열까지 
+# DP[1] = 3
+# # 2열
+# DP[2] = 7
+# # 3열
+# DP[3] = 17
 
-# 생각. visited를 한번에 쓰는 방법.
-# 다익스트라가능? 안될것같은데
-# 다익스트라라는 것은 각지점에서의 최대또는 최소값을 저장해두었다가 
-# 탐색과정에서 그것이 갱신되는 경우에만 탐색을 이어나가는 것인데
-# 될것같은데..?
-# 두단계전까지는 무조건 최소가 최소 맞는것같은데?
-# 두단계전의 색에 관계 없이, 아 그것도 아닌듯. 
-# 두단계전까지 10인데 전단계에서 억 억 1 이렇게 비용들면
-# 다익스트라의 사용조건 : 현재지점까지의 최대,최소가 그다음 지점을 계산할때 영향을 주냐 안주냐 차이인듯. 
-# "n번지점까지의 최소가 A라 하더라도, 그 다음 지점을 따질때 따지지 못하는 값이 생기기 때문에 n번째지점까지의 최소경로가 전체 최소경로의 일부라고 장담할 수 없다." 
-for input in li:
-    R,G,B = input
+def f(X):
+    if X >3 :
+        return f(X-2)*5 + f(X-3)*2
+    if X ==1:
+        return 3
+    if X ==2:
+        return 7
+    if X ==3 :
+        return 16
 
-m = 100000000
-while deck:
-    last_color, completed, V = deck.popleft()
-    if completed == N:
-        if V < m:
-            m = V
-        continue
-    for idx, color in enumerate(['R','G','B']):
-        if last_color == color:
-            continue
-        if V + li[completed][idx] >= m:
-            continue
-        deck.append([color,completed+1,V+li[completed][idx]])
+# for n in range(4,N+1):
+#     DP[n] = DP[n-2]*5 + DP[n-3]*2
 
-print(m)
-
+print(f(N)%9901)
 # 코드 끝
 # 실행 시간: 206.12s
 # 메모리 사용량: 약 31200 KB + 110KB
