@@ -1,43 +1,31 @@
-# 이렇게 하는것보다는 B를 반씩 줄여나가는 편이 깔끔하다.
-# 일단 해보자.
+from collections import deque
 
-A,B,C = map(int,input().split())
+while True:
+    w, h = map(int,input().split())
+    if (w,h) == (0,0):
+        break
+    MAP = []
+    for _ in range(h):
+        MAP.append(list(map(int,input().split())))
 
-if B == 1:
-    print(A%C)
+    check = [[0]*w for _ in range(h)]
 
-else:
+    #print('MAP',MAP)
 
-    n = 2
+    cnt = 0 
+    for i in range(h):
+        for j in range(w):
+            if MAP[i][j] == 1 and not check[i][j]:
+                cnt += 1
+                deck = deque()
+                deck.append((i,j))
 
-    DP= [A%C] # DP[i] = A의 2^idx승의 나머지
-    rest = A%C
+                while deck:
+                    ni,nj = deck.popleft()
 
-    while True:
-        rest = (rest **2) % C   # B가 1이면 여기서 문제 생김. 걍 A%C가 정답인데 변질됨. 
-        DP.append(rest)
-        if n*2 > B :
-            break
-        n *= 2
-
-    # 남은 곱해야할 횟수 = B - n
-    B -= n
-
-    # print( '남은곱해야할수', B)
-    # print('dp',DP)
-
-    cursor = len(DP)-1
-
-    while B>0:
-        cursor -=1
-        while 2**cursor > B:
-            cursor -= 1
-        
-        # print('cursor',cursor, '뺄숫자', 2**cursor)
-        B-=2**cursor
-        rest = (rest * DP[cursor])%C
-        # print('현재까지 계산한 나머지', rest)
-        # print('남은 곱할 횟수',B)
-
-
-    print(rest)
+                    for di,dj in [(1,0),(-1,0),(1,1),(-1,-1),(0,1),(0,-1),(-1,1),(1,-1)]:
+                        if 0 <= ni + di < h and 0<= nj + dj < w and MAP[ni+di][nj+dj] == 1 and not check[ni+di][nj+dj]:
+                            deck.append((ni+di,nj+dj))
+                            check[ni+di][nj+dj] = 1
+                
+    print(cnt)
