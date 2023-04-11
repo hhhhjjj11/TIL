@@ -1,4 +1,19 @@
 # 해보기 B를줄여가기
+A, B, C = map(int,input().split())
+
+rest = A % C
+while B > 0:
+    if B % 2 == 1:
+        B -= 1
+        rest *= A
+        rest %= C
+    elif B % 2 == 0:
+        B //= 2
+        rest = rest ** 2
+        rest %= C
+
+print(rest)
+
 
 
 # 이렇게 하는것보다는 B를 반씩 줄여나가는 편이 깔끔하다.
