@@ -1,31 +1,43 @@
-from collections import deque
+# 1. 벽을 세워보고 (탐색1)
+# 2. 각각에 대해 bfs돌리고 (탐색2)
+# 3. 0갯수 센다
+# 말하자면,,,, 이중탐색..? 이라고 해야하나?
 
-while True:
-    w, h = map(int,input().split())
-    if (w,h) == (0,0):
+# 벽을세워보는 방법
+
+# 일단 내 생각대로 풀어보고 문제점이 무엇인지 생각해보자
+
+import copy
+
+N,M =map(int,input().split())
+
+MAP = [list(map(int,input())) for _ in range(N)]
+
+MAP_copied = copy.deepcopy(MAP) # 딥카피를쓰거나, 아니면 바꾼 좌표를 임시저장해놨다가 마지막에 다시 원상복구하기.
+ #탐색이 끝났을때 break해줘야하는데 "만약 탐색이끝났다면"을 뭐 로직으로 나타낼 수가 없는듯??
+cnt = 0 
+for i in range(N):
+    for j in range(M):
+        if MAP_copied[i][j] == 0:
+            MAP_copied[i][j] = 1
+            cnt += 1
+            if cnt == 3:
+                break
+    if cnt ==3:
         break
-    MAP = []
-    for _ in range(h):
-        MAP.append(list(map(int,input().split())))
 
-    check = [[0]*w for _ in range(h)]
+# 요까지 하면 이제 벽세개 지은거임
+# 이제 MAP_copied에 대하여 
+# 바이러스 퍼트린다음에 안전지대 세주면 되긴해.
+# 이거는 오케인데 
+# 근데 문제는... 벽 세개를 지은 경우들을 어떻게 구분하느냐.. 어떻게 탐색할 것이냐
+# 일단.  
+# 벽 세개를 지은거를.. 따로 체크 해줘야 한다는 점임.
+# 벽 세개를 어디다 지었는지 위치를 기억해서 그거를 거르는 작업을 따로 해줘야 한다이거임 재귀를 쓰지 않으면
+# 근데 재귀를 쓰면 그거를 왜 안해도 되냐..? 
+# 재귀를 쓰면 알아서 케이스가 나뉘어 들어간다
 
-    #print('MAP',MAP)
 
-    cnt = 0 
-    for i in range(h):
-        for j in range(w):
-            if MAP[i][j] == 1 and not check[i][j]:
-                cnt += 1
-                deck = deque()
-                deck.append((i,j))
 
-                while deck:
-                    ni,nj = deck.popleft()
-
-                    for di,dj in [(1,0),(-1,0),(1,1),(-1,-1),(0,1),(0,-1),(-1,1),(1,-1)]:
-                        if 0 <= ni + di < h and 0<= nj + dj < w and MAP[ni+di][nj+dj] == 1 and not check[ni+di][nj+dj]:
-                            deck.append((ni+di,nj+dj))
-                            check[ni+di][nj+dj] = 1
-                
-    print(cnt)
+            # 재귀를 쓰면 차원이 나눠져서 상황이 알아서 갈리는 반면
+            # 반복문으로 해결하려면 좆같다
