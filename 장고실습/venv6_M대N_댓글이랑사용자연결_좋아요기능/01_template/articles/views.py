@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
-
+from django.contrib.auth import get_user_model
 # Create your views here.
 def index(request):
     articles = Article.objects.all()

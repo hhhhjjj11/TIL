@@ -72,7 +72,7 @@ def profile(request, username):
     context= {
         'person':person,
     }
-    return render(request, 'accounts/profile.html', context)
+    return render(request,'accounts/profile.html', context)
 
 def follow(request, user_pk):
     person = get_user_model().objects.get(pk=user_pk)

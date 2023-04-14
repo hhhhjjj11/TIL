@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>DETAIL</h1>
+
+<div>
+    <p>제목 : {{movie.title}}</p>
+    <p>줄거리 : {{movie.description}}</p>
+</div>
+
+{% comment %} 영화데이터 삭제 버튼 {% endcomment %}
+<a href="{% url 'movies:update' movie.pk %}"><button>수정하기</button></a>
+<form action="{% url 'movies:delete' movie.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="삭제하기">
+</form>
+
+{% comment %} 댓글 {% endcomment %}
+{% if comments %}
+    {% for comment in comments %}
+        {{comment.user_id}} - {{comment.content}}
+        {% comment %} 댓글 작성자만 댓글 삭제 가능 {% endcomment %}
+        {% if comment.user_id == req.user  %}
+            <form action="{% url 'movies:comment_delete' movie.pk comment.pk %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="댓글지우기">
+            </form>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% comment %} 댓글작성하기 {% endcomment %}
+<form action="{% url 'movies:comment_create' movie.pk %}" method="POST">
+    {% csrf_token %}
+    {{comment_form.as_p}}
+    <input type="submit" value="댓글작성">
+</form>
+
+
+<a href="{% url 'movies:index' %}"><button>목록으로 돌아가기</button></a>
+{% endblock content %}
+
+

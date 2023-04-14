@@ -14,7 +14,7 @@ class ArticleForm(forms.ModelForm):
             'user',
             'like_users',
         )
-
+    
 
 class CommentForm(forms.ModelForm):
     class Meta:

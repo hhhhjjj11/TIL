@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>INDEX</h1>
+    <h2><a href="{% url 'movies:create' %}">[CREATE]</a></h2>
+
+    <hr>
+
+    {% comment %} 영화 목록 {% endcomment %}
+    {% for movie in movies %}
+        <p><a href="{% url 'movies:detail' movie.pk %}">{{movie.title}}</a></p>
+        <p><a href="{% url 'accounts:profile' movie.user_id.username %}">{{movie.user_id.username}}</a></p>
+        {{movie.user_liked.count}}
+        {% if user.is_authenticated %}
+            <div>
+                <form action="{% url 'movies:likes' movie.pk %}">
+                    {% if req.user in movie.user_id_set.all %}  
+                        <input type="submit" value="좋아요취소">
+                    {% else %}
+                        <input type="submit" value="좋아요">
+                    {% endif %}
+                </form>
+            </div>
+        {% endif %}
+        <hr>
+    {% endfor %}
+
+
+{% endblock content %}
+
+
+
