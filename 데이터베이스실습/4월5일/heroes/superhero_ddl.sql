@@ -6,7 +6,7 @@
 -- 새로운 테이블을 생성하기
 CREATE TABLE superheroes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    이름 TEXT NOT NULL,
+    이름 TEXT UNIQUE NOT NULL,
     직업 TEXT NOT NULL,
     능력 TEXT,
     국적 TEXT,

@@ -14,7 +14,10 @@ N,M =map(int,input().split())
 MAP = [list(map(int,input())) for _ in range(N)]
 
 MAP_copied = copy.deepcopy(MAP) # 딥카피를쓰거나, 아니면 바꾼 좌표를 임시저장해놨다가 마지막에 다시 원상복구하기.
- #탐색이 끝났을때 break해줘야하는데 "만약 탐색이끝났다면"을 뭐 로직으로 나타낼 수가 없는듯??
+ # 탐색이 끝났을때 break해줘야하는데 "만약 탐색이끝났다면"을 뭐 로직으로 나타낼 수가 없는듯??
+ # 벽 세개를 짓는 경우를 모두 돌았을경우.
+ # 구글링해보니, 재귀를 쓰지 않는경우 조합을 써서 풀 수 있네. 벽을 세울수 있는 경우를 조합으로 모두 구하고 각 경우에 대해 조사
+
 cnt = 0 
 for i in range(N):
     for j in range(M):
@@ -22,7 +25,7 @@ for i in range(N):
             MAP_copied[i][j] = 1
             cnt += 1
             if cnt == 3:
-                break
+                이제 바이러스퍼트리고 안전지대세주면됨
     if cnt ==3:
         break
 
