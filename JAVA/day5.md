@@ -74,6 +74,17 @@ public String toString() {
 }
 
 ```
+<br><br>
+
+# toString 메서드 오버라이딩 해서 써야됨
+```java
+@Override
+public String toString() {
+    return "student [name = "+ super.name + ", age =" + super.age + ", major =" + this.major+ "";
+}
+
+```
+<br><br>
 
 # Object클래스의 equals메서드 오버라이딩하기
 - 객체의 주소비교 : == 이용
@@ -197,7 +208,87 @@ public class Test {
 - 변수 앞에 붙으면 : 더 이상 값을 바꿀 수 없음을 상수화 
 
 
-# 다형성
+# 다형성 [형(type)을 많이 가질 수 있다]
+[여러 클래스에 소속될 수 있다.]
 - 상속관계에 있을때, 조상 클래스의 타입으로 자식 클래스 객체를 참조할 수 있다.
-  
-## 
+- 무슨 말이냐면 다음이 된단 얘기
+	```java
+	Parent obj = new Children();
+	```
+- 예
+	```java
+		Person[] persons = new Person[3];
+		persons[0] = new Person();
+		persons[1] = new Student();
+		persons[2] = new Student();
+	```
+## 형변환 (소속 클래스 변환하기)
+- 자식클래스에서 부모클래스 소속으로 바꾸기 -> 걍 됨 (묵시적형변환)
+- 부모클래스에서 자식클래스 소속으로 바꾸기 -> 명시해야함 (명시적형변환)
+
+	```java
+	//자식 -> 부모
+	Student student = new Student();
+	Person person = student;
+
+	//부모 -> 자식
+	Person person = new Person();
+	Student student = (Student)person; //생략안됨
+
+	```
+
+## 부모 -> 자식 형변환시 문제점
+
+- 원래 부모클래스 소속이었던 객체는 자식클래스에 속하게 되어도 메모리상에 원래클래스인 부모클래스만 들어있기 때문에 자식클래스에서 정의한 메소드를 쓸 수 없을 수 있다.
+- 해결방법 : 자식 -> 부모 -> 자식으로 형변환 한번 더 해줌
+```java 
+package test_polymorphsim2;
+
+public class Test {
+	public static void main(String[] args) {
+		// 자식 -> 부모 -> 다시 자식
+		Student st = new Student("박싸피", 25, "자바");
+		Person p = st;
+		Student st3 = (Student)p;
+		st3.study();   // 공부를 합니다.
+		
+		// 부모 -> 자식
+		Person p2 = new Person("김싸피", 24);
+		Student s = (Student)p2;
+		s.study();    // ERROR
+				
+	}
+}
+```
+<br>
+
+## 알고있기 : 자식 -> 부모 형 변환 시 멤버변수랑 메서드가 다른 식으로 됨. 메서드는 여전히 자식메서드 나오는데 멤버변수는 부모껄로 바뀜. 
+- 다음의 예를 보자.
+```java
+// SuperClass에서
+String x = "Super"
+public void method(){
+	System.out.println("SuperClass method")
+}
+
+// SubClass 에서
+String x = "sub"
+public void method(){
+	System.out.println("SubClass method")
+}
+
+// TestClass 에서
+SubClass Child = new SubClass();
+System.out.println(child.x);
+child.method();
+
+SuperClass parent = Child;
+System.out.println(parent.x);
+parent.method();
+
+//출력
+//sub
+//Sub Class method
+//super
+//Sub Class method
+```
