@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>마우스를 올려보세요</button>
+    <button>이곳에도 마우스를 올려보세요</button>
+    <button id="btn-created">클릭하면 p 태그 생성</button>
+
+
+    <form id="myForm" action="">
+        <div>
+            <input type="text" id="myInput">
+            <input type="submit" value="Add">
+        </div>
+    </form>
+
+    <ul id ="output-list"></ul>
+
+    <script>
+        alert('javascript')
+        // document: DOM에 접근하기 위한 최상위 객체
+        // 요소 선택자
+        // querySelector: 선택자로 요소를 선택
+        // 가장 먼저 조건에 만족하는 요소를 선택
+        const btn = document.querySelector('button')
+        
+        
+        // 이벤트핸들러 등록하기
+        const myfunc1 = function(event) {
+            alert('버튼이 클릭됨!')
+        }
+
+        // 클릭 이벤트 발생 시 myFunc1 함수 호출
+        // click: 사용자 동작명
+        btn.addEventListener('click', myfunc1) // 클릭 이벤트 발생시 myfunc1이 실행되도록 하기
+        
+        console.log(btn)
+
+        // 조건을 만족하는 모든 요소
+        const btns = document.querySelectorAll('button')
+        console.log(btns)
+        console.log(Array.isArray([1,2,3]))
+        console.log(Array.isArray(btns))    
+
+        // 마우스를 올렸을 때(mouseover) 특정 함수 호출
+        for (let i = 0; i< btns.length; i++){
+            console.log(btns[i])
+            btns[i].addEventListener('mouseover', (e)=>{
+                console.log(btns[i].innerHTML)
+            })
+        }
+
+        // 유사배열객체를 새로운 배열로 반환
+        Array.from(btns).forEach((element)=>{
+            element.addEventListener('mouseover', (e)=>{
+                console.log(element.innerHTML)
+            })
+        })
+
+        // 요소 추가, 삭제해보기
+        cnt = 0
+        const btnCreatePTag = document.querySelector('#btn-created')
+        btnCreatePTag.addEventListener('click', (e)=>{
+            const pTag = document.createElement('p')
+            const deletebutton = document.createElement('button')
+            deletebutton.textContent=`삭제${cnt}`
+            pTag.textContent = `생성된 p 태그${cnt}`
+            document.body.appendChild(pTag)
+            document.body.appendChild(deletebutton)
+            cnt ++
+
+            // 클래스 추가
+            // 1. setAttribute
+            deletebutton.setAttribute('class', 'btn btn-danger')
+            // 2. classList에 add쓰기
+            deletebutton.classList.add('btn', 'btn-danger')
+
+
+            // 삭제 버튼 클릭 시 요소 삭제
+            deletebutton.addEventListener('click', (e)=>{
+                pTag.remove()
+                deletebutton.remove()
+            })
+
+
+
+
+        })
+
+
+        // var btn2 = document.getElementById('my-button')
+        // var btn2 = document.querySelector('#my-button')
+
+        // 두 코드는 동일한 기능
+        // const btn3 = document.getElementsByClassName('btn')
+        // const btn3 = docuemtn.querySelectorAll('.btn')
+        // 요소 선택자
+
+        const myForm = document.querySelector('#myForm')
+        const myInput = document.querySelector('#myInput')
+        const outputList = document.querySelector('#output-list')
+
+        myForm.addEventListener('submit', (e) => {
+            //이벤트의 기본 동작을 막음 -> 폼태그의 get요청(action비워있읜까 결국 새로고침)을 막음
+            e.preventDefault() 
+            console.log('submit')
+
+            // 사용자가 입력한 텍스트를 가져옴
+            const inputElement = e.target.querySelector('#myInput')
+            const inputValue = inputElement.value
+            // form태그 안의 #myInput 을 선택
+
+
+            // ul 태그 자식으로 li 태그를 추가
+            const newElement = document.createElement('li')
+            newElement.textContent = inputValue
+            outputList.appendChild(newElement)
+
+            inputElement.value = ''
+
+        })
+
+    </script>
+</body>
+</html>
