@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>클릭 시 고양이 가져옴</button>
+
+    <script>
+        const catApiURL = "https://api.thecatapi.com/v1/images/search"
+
+        const btn = document.querySelector('button')
+        btn.addEventListener('click', function(){
+            console.log('클릭!')
+            axios.get(catApiURL) //해당 url로 get요청 보냄
+            .then((response)=>{
+                // console.log(res)  콘솔에 찍어보는 습관 들이기.
+                // 서버로부터 오는 데이터를 사용하기 위한 코드는 이 안에!!
+                const img_url = response.data[0].url                // 응답객체로부터 url을 받아오고
+                const imgElement = document.createElement('img')    // img태그를 만든다
+                imgElement.setAttribute('src', img_url)             // src속성에 url을 첨가
+                document.body.appendChild(imgElement)               // 바디태그하위에 태그 삽입 -> 이거까지 해야 화면에 나타남
+                console.log(img_url)
+            })
+        })
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</body>
+</html>
