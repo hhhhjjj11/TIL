@@ -55,6 +55,10 @@
             console.log(val)
           },
           deep: true
+          // 설명
+          // 객체 myObj를 감시하고있다.
+          // 그런데 토글에 의해 클릭할때마다 myObj의 key인 completed가 변하고 있음
+          // myObj를 watch하고 잇는데 그 안의 값까지 감지하려면 deep:true써줘야됨
         },
       }
     })

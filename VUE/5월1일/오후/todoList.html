@@ -1,4 +1,16 @@
 <!-- 양방향 바인딩 이용해서 투두리스트 만들귀~ -->
+<!-- 
+    1. 체크(처리완료)하면 줄긋기 -> 줄긋기 클래스css만들어두고 동적바인딩
+    2. 입력시 -> items배열에 item객체 추가, 이때 각 item객체는 text와 ischecked 포함.
+    3. 출력시 -> li태그 밑에 items 포문 돌린다. -> 이때 체크박스는 item.isChecked랑 v-model로 바인딩한다.
+            -이때, 만들어둔 클래스CSS 동적바인딩한다.
+    4. 완료 목록 삭제버튼누르면 -> items를 필터를 돌려줌, checked안된 애들만 남겨줌. 
+    5. 로컬스토리지 이용하기
+        - 새로고침해도 목록 안날아가게 할 수 있음
+        - 추가시, 그리고 제거시마다 로컬스토리지에 현재 목록을 저장하고,
+        - 첫 랜더링시에 items를 로컬스토리지에 저장된걸 불러와서 할당해줌 (로컬저장소에 없으면 빈배열)
+ -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,8 +39,10 @@
             <ul>
                 <li v-for="item in items" :class="{ checkedDecoration: item.isChecked}">
                     <input type="checkbox" v-model="item.isChecked">{{item.text}}
-                    <!-- 체크박스는 기본적으로 checked 속성을 내장하고 있음을 기억하자 
-                    그래서 체크박스에 체크를하면 checked 값이 true로 바뀐다링 -->
+                    <!-- 체크박스는 기본적으로 checked 속성을 내장하고 있음을 기억하자
+                        체크박스는 값이 체크여부임. 그래서 v-model="X"로 바인딩하면 체크여부랑 X랑 운명공동체되는거임 
+                        (input type=text태그는 v-model로 묵으면 텍스트 값이 묶이는것처럼,, )
+                    그래서 체크박스에 체크를하면 v-model바인딩된 item.isChecked 값이 true로 바뀌고, 체크해제하면 false로 바뀐다링 -->
                 </li>
             </ul>
         </div>
@@ -62,7 +76,6 @@
                     this.items = this.items.filter((element) =>{
                         return element.isChecked === false
                     })
-
                     localStorage.setItem('items', JSON.stringify(this.items))
                 }
             }
