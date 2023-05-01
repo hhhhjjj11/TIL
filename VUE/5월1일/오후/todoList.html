@@ -1,0 +1,73 @@
+<!-- 양방향 바인딩 이용해서 투두리스트 만들귀~ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 체크여부에 따라 이 css가 토글되면 되겠다 -->
+    <style>
+        .checkedDecoration {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+
+    <div id="app">
+        <!-- 사용자 입력 파트 -->
+        <div>
+            <input type="text" v-model="word">
+            <button @click="plusTodoList">+</button>
+        </div>
+        <!-- 출력 파트 -->
+        <div>
+            <ul>
+                <li v-for="item in items" :class="{ checkedDecoration: item.isChecked}">
+                    <input type="checkbox" v-model="item.isChecked">{{item.text}}
+                    <!-- 체크박스는 기본적으로 checked 속성을 내장하고 있음을 기억하자 
+                    그래서 체크박스에 체크를하면 checked 값이 true로 바뀐다링 -->
+                </li>
+            </ul>
+        </div>
+        <button @click="deleteChecked">완료 목록 삭제</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                word: '',
+                items: localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [], //로컬스토리지에 있으면 가져오고 없으면 빈배열
+            },
+            methods: {
+                plusTodoList : function (){
+                    if(this.word.length===0){
+                        alert("내용을 입력해 주세요!")
+                    }else{
+                        this.items.push({
+                            text: this.word,
+                            isChecked : false,
+                        })
+                    }
+
+                    //내장객체 localStorage이용해서 브라우저에 정보 저장하기
+                    // [참고] 로컬스토리지에는 문자열 밖에 저장하지 못함
+                    // [참고] 로컬스토리지는 5MB로 작은공간이라 자주 쓰진 않는데 종종 잘 활용 된다~
+                    localStorage.setItem('items', JSON.stringify(this.items))
+                },
+                deleteChecked (){
+                    this.items = this.items.filter((element) =>{
+                        return element.isChecked === false
+                    })
+
+                    localStorage.setItem('items', JSON.stringify(this.items))
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

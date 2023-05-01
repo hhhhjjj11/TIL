@@ -1,0 +1,47 @@
+<!-- 클릭할때마다 박스색깔 바꾸기 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      border: 1px solid black;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>박스 색상 바꾸기</h1>
+    <h3>색상 : </h3>
+    <div class="box" :style="{ backgroundColor: color}" @click="changeClr()">
+    </div>
+  </div>
+<!--
+클릭 -> 핸들러 -> 현재의 color변수를 랜덤으로 바꿔줌 -> color값이 바인딩해놨던 color가 바뀌게됨
+- 랜덤으로 바꿔줌 
+ -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        colors : ['red', 'orange', 'yellow', 'green', 'blue', 'violet'],
+        color: 'red',
+      },
+      methods : {
+        changeClr() {
+          this.color = _.sample(this.colors)   // this.color로 data의 color변수 바로 접근 가능 하다.
+        }
+      }
+    })
+  </script>
+</body>
+</html>
