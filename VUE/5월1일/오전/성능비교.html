@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <!-- 결론 : DOM을 직접 하면 느리다 -->
+  <div id="app1">텍스트를 변경</div>
+  <div id="app2">DOM 직접 조작</div> 
+  <div id="app3">{{ message }}</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app1 = document.querySelector('#app1')
+    const updateFunc1 = function() {
+      for(let i = 0 ; i < 10000 ; i++) {
+        app1.textContent = '변경하기'
+      }
+    }
+
+    const start = performance.now()
+    updateFunc1()
+    const end = performance.now()
+
+    console.log(`textContent 변경 = ${end - start}`)
+
+    const app2 = document.querySelector('#app2')
+    const updateFunc2 = function() {
+      for(let i = 0 ; i < 10000 ; i++) {
+        app2.innerHTML = '변경'
+      }
+    }
+
+    const start2 = performance.now()
+    updateFunc2()
+    const end2 = performance.now()
+
+    console.log(`innerHTML 변경 = ${end2 - start2}`)
+
+    const app3 = new Vue({
+      el: '#app3',
+      data: {
+        message: '뷰로 조작'
+      },
+      methods: {
+        updateFunc3() {
+          for(let i = 0 ; i < 10000 ; i++) {
+            this.message = 'Vue 에서 변경'
+          }
+        }
+      }
+    })
+
+    const start3 = performance.now()
+    app3.updateFunc3()
+    const end3 = performance.now()
+
+    console.log(`Vue 로 변경 = ${end3 - start3}`)
+  </script>
+</body>
+</html>
