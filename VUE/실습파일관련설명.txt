@@ -1,0 +1,10 @@
+장고의 venv를 git에 올리지 않듯,
+node-modules를 올리지 않는다.
+
+장고에서 requirements.txt에 사용한 패키지 목록이 적혀있던 것처럼,
+js프로젝트도 패키지목록이 package.json에 적혀있음
+
+장고에서 pip install -r requiremetns.txt로 라이브러리 한번에 설치한것처럼,
+js에서는 npm i 명령어로 package.json에 적힌 라이브러리들을 설치해줌. 
+
+물론 gitignore에 ,장고에서 venv를 넣었던것처럼, node-modules를 넣어준다.
