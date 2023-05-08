@@ -11,7 +11,7 @@ export default new Vuex.Store({
     //getters사용해보기
     getPlusCounter(state){
       console.log('getters호출!')
-      // 가능은 하다!
+      // 가능은 하다! 
       state.counter += 10
       return state.counter
     }

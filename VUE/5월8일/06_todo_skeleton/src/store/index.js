@@ -65,7 +65,7 @@ export default new Vuex.Store({
     },
     loadTodos(context){
       context.commit('LOAD_TODOS')
-    }
+    } 
   },
   modules: {
   }
