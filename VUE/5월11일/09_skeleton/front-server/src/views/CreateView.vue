@@ -10,6 +10,7 @@
       <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
       <input type="submit" id="submit">
     </form>
+    {{ this.content }}
   </div>
 </template>
 
