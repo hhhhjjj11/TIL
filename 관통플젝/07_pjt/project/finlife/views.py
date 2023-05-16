@@ -24,6 +24,7 @@ def test(req):
 def api_test(req):
     URL = BASE_URL + 'depositProductsSearch.json'
     print('apikey', settings.API_KEY)
+
     params = {
         'auth': settings.API_KEY,
         # 금융회사 코드 020000(은행)
@@ -44,11 +45,17 @@ def save_deposit_products2(req):
 @api_view(['GET'])
 def save_deposit_products(req):
     data = api_test(req).json()
+<<<<<<< HEAD
     products = data['result']
     
     # return Response(products)
+=======
+    products = data['result']   
+    print(products)
+>>>>>>> 3e8ca0c5b3af19ff2e7e6d7df7e02a016ec3aa4c
     for product in products['baseList']: 
         try:
+            print('sdfsdf')
             product_inDB = DepositProduct.objects.get(fin_prdt_cd= product["fin_prdt_cd"])
 
         except:
@@ -61,9 +68,23 @@ def save_deposit_products(req):
         # if serializer.is_valid(raise_exception = True):
         #     serializer.save()
 
+<<<<<<< HEAD
         # for key in option.keys():
         #     if option[key] == None:
         #         option[key] = -1
+=======
+        try:
+            option_inDB = DepositProduct.objects.get(fin_prdt_cd= product["fin_prdt_cd"])
+
+        except:
+            serializer = DepositProductSerializer(data = product)
+            if serializer.is_valid(raise_exception = True):
+                serializer.save()
+
+        for key in option.keys():
+            if option[key] == None:
+                option[key] = -1
+>>>>>>> 3e8ca0c5b3af19ff2e7e6d7df7e02a016ec3aa4c
 
         product = DepositProduct.objects.get(fin_prdt_cd = option['fin_prdt_cd'])
         serializer = DepositOptionsSerializer(data = option)
