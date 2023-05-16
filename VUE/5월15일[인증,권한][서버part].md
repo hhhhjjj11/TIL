@@ -124,3 +124,39 @@ Body 에 title, content를 넣어도
    - @permission_classes
 4. 인증방법은 다양한 방법이 있으므로 내 서비스에 적합한 방식을 선택한다.
 
+<br><br>
+
+
+# 유저필드 커스터마이징하기
+## 1. 유저모델 작성
+```python
+
+```
+## 2. settings.py에서 설정 추가
+```python
+# dj-rest-auth는 email을 필수적으로 사용하도록 구현되어 있으므로, 해당 사항을 수정
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = None
+
+# django 인증 시스템에서 사용할 백엔드 클래스 지정
+# 기본 인증 백엔드와 allauth 패키지에서 제공하는 인증 백엔드를 모두 사용하겠다는 설정.
+AUTHENTICATION_BACKENDS=(
+    # django 기본 인증 백엔드
+    "django.contrib.auth.backends.ModelBackend",
+    # django-allauth 패키지에서 제공하는 인증 백엔드 클래스
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+```
+
+## [참고] dj-rest-auth 기능
+1. accounts/ password/reset/ [name='rest_password_reset']
+- 패스워드 초기화 (이메일로 전송)
+3. accounts/ password/reset/confirm/[name='rest_password_reset_confirm']
+- 패스워드 초기화(이메일 확인 후 초기화 페이지)
+5. accounts/ login/ [name='rest_login']
+6. accounts/ logout/ [name='rest_logout']
+7. accounts/ user/ [name='rest_user_details']
+8. accounts/ password/change/[name='rest_password_change']
+- 패스워드변경
+10. accounts/signup/
+- 회원가입
