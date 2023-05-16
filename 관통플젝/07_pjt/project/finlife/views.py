@@ -34,10 +34,19 @@ def api_test(req):
     return response  
 
 @api_view(['GET'])
+def save_deposit_products2(req):
+    data = api_test(req).json()
+    products = data['result']
+    print(products)
+    return Response(products)
+    
+    
+@api_view(['GET'])
 def save_deposit_products(req):
     data = api_test(req).json()
     products = data['result']
-
+    
+    # return Response(products)
     for product in products['baseList']: 
         try:
             product_inDB = DepositProduct.objects.get(fin_prdt_cd= product["fin_prdt_cd"])
@@ -48,23 +57,17 @@ def save_deposit_products(req):
                 serializer.save()
 
     for option in products['optionList']:
+        # serializer = DepositOptionsSerializer(data = option)
+        # if serializer.is_valid(raise_exception = True):
+        #     serializer.save()
 
-        try:
-            option_inDB = DepositProduct.objects.get(fin_prdt_cd= product["fin_prdt_cd"])
-
-        except:
-            serializer = DepositProductSerializer(data = product)
-            if serializer.is_valid(raise_exception = True):
-                serializer.save()
-
-
-
-        for key in option.keys():
-            if option[key] == None:
-                option[key] = -1
+        # for key in option.keys():
+        #     if option[key] == None:
+        #         option[key] = -1
 
         product = DepositProduct.objects.get(fin_prdt_cd = option['fin_prdt_cd'])
         serializer = DepositOptionsSerializer(data = option)
+        
         if serializer.is_valid(raise_exception=True): 
             serializer.save(fin_prdt_cd=product)      
 

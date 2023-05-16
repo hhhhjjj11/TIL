@@ -2,8 +2,6 @@ from rest_framework import serializers
 from .models import DepositProduct, DepositOptions
 
 
-
-
 class DepositOptionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = DepositOptions
