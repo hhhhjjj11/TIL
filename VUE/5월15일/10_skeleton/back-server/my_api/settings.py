@@ -64,6 +64,7 @@ INSTALLED_APPS = [
 
 REST_AUTH={ # 회원가입시 토큰 발급
     'SESSION_LOGIN': False,
+    'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
 }
 
 SITE_ID = 1
@@ -204,3 +205,6 @@ AUTHENTICATION_BACKENDS=(
     # django-allauth 패키지에서 제공하는 인증 백엔드 클래스
     "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+# allauth 의 default adapter 설정
+ACCOUNT_ADAPTER = 'accounts.models.CustomAccountAdapter'

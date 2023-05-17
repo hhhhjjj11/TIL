@@ -130,7 +130,53 @@ Body 에 title, content를 넣어도
 # 유저필드 커스터마이징하기
 ## 1. 유저모델 작성
 ```python
+from django.db import models
+from django.contrib.auth.models import AbstractUser
 
+class User(AbstractUser):
+    # 여기다가 닉네임필드 만들구
+    nickname = models.CharField(max_length=50)
+
+# 상속 받아서 구현해보기
+from allauth.account.adapter import DefaultAccountAdapter
+
+class CustomAccountAdapter(DefaultAccountAdapter):
+    # 기본 코드는 다 그대로 쓰고, save_user 만 오버라이딩 하겠다!
+    def save_user(self, request, user, form, commit=True):
+        """
+        Saves a new `User` instance using information provided in the
+        signup form.
+        """
+        from allauth.account.utils import user_email, user_field, user_username
+
+        data = form.cleaned_data
+        first_name = data.get("first_name")
+        last_name = data.get("last_name")
+        email = data.get("email")
+        username = data.get("username")
+        # nickname 필드
+        nickname = data.get("nickname")
+
+        user_email(user, email)
+        user_username(user, username)
+        if first_name:
+            user_field(user, "first_name", first_name)
+        if last_name:
+            user_field(user, "last_name", last_name)
+        # 닉네임 필드 추가
+        if nickname:
+            user_field(user, "nickname", nickname)
+
+        if "password1" in data:
+            user.set_password(data["password1"])
+        else:
+            user.set_unusable_password()
+        self.populate_username(request, user)
+        if commit:
+            # Ability not to commit makes it easier to derive from
+            # this adapter by adding
+            user.save()
+        return user
 ```
 ## 2. settings.py에서 설정 추가
 ```python
@@ -146,7 +192,17 @@ AUTHENTICATION_BACKENDS=(
     # django-allauth 패키지에서 제공하는 인증 백엔드 클래스
     "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+# dj_rest_auth 의 설정
+REST_AUTH = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
+}
+
+# allauth 의 default adapter 설정
+ACCOUNT_ADAPTER = 'accounts.models.CustomAccountAdapter'
+
 ```
+- 마이그레이션 다시하기~
 
 ## [참고] dj-rest-auth 기능
 1. accounts/ password/reset/ [name='rest_password_reset']
@@ -160,3 +216,79 @@ AUTHENTICATION_BACKENDS=(
 - 패스워드변경
 10. accounts/signup/
 - 회원가입
+
+## 3. serializers.py 작성
+```python
+from django.core.exceptions import ValidationError as DjangoValidationError
+from rest_framework import serializers
+from allauth.utils import email_address_exists, get_username_max_length
+from allauth.account import app_settings as allauth_account_settings
+from allauth.account.adapter import get_adapter
+from allauth.account.utils import setup_user_email
+from django.utils.translation import gettext_lazy as _
+
+class RegisterSerializer(serializers.Serializer):
+    username = serializers.CharField(
+        max_length=get_username_max_length(),
+        min_length=allauth_account_settings.USERNAME_MIN_LENGTH,
+        required=allauth_account_settings.USERNAME_REQUIRED,
+    )
+    email = serializers.EmailField(required=allauth_account_settings.EMAIL_REQUIRED)
+    password1 = serializers.CharField(write_only=True)
+    password2 = serializers.CharField(write_only=True)
+    # 추가~
+    nickname = serializers.CharField(max_length=50)
+
+    def validate_username(self, username):
+        username = get_adapter().clean_username(username)
+        return username
+
+    def validate_email(self, email):
+        email = get_adapter().clean_email(email)
+        if allauth_account_settings.UNIQUE_EMAIL:
+            if email and email_address_exists(email):
+                raise serializers.ValidationError(
+                    _('A user is already registered with this e-mail address.'),
+                )
+        return email
+
+    def validate_password1(self, password):
+        return get_adapter().clean_password(password)
+
+    def validate(self, data):
+        if data['password1'] != data['password2']:
+            raise serializers.ValidationError(_("The two password fields didn't match."))
+        return data
+
+    def custom_signup(self, request, user):
+        pass
+
+    def get_cleaned_data(self):
+        return {
+            'username': self.validated_data.get('username', ''),
+            'password1': self.validated_data.get('password1', ''),
+            'email': self.validated_data.get('email', ''),
+            # 추가~
+            'nickname': self.validated_data.get('nickname', ''),
+        }
+
+    def save(self, request):
+        # allauth 의 기본 adaper 를 가져옴
+        adapter = get_adapter()
+        user = adapter.new_user(request)
+        self.cleaned_data = self.get_cleaned_data()
+        # 기본 adaper 의 save_user 는 nickname 필드를
+        # 저장하지 않는다!
+        user = adapter.save_user(request, user, self, commit=False)
+        if "password1" in self.cleaned_data:
+            try:
+                adapter.clean_password(self.cleaned_data['password1'], user=user)
+            except DjangoValidationError as exc:
+                raise serializers.ValidationError(
+                    detail=serializers.as_serializer_error(exc)
+            )
+        user.save()
+        self.custom_signup(request, user)
+        setup_user_email(request, user, [])
+        return user
+```
