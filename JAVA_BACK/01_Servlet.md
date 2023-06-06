@@ -1,4 +1,16 @@
 # Servlet
+## 요약
+1. 서버돌릴려면 톰캣 (was)
+2. 요청처리해주는 애 - 서블릿
+3. 인터페이스임
+4. 구현귀찮음, 그래서 구현해놓은 추상클래스가 있음 - GenericServlet
+5. GenericServlet 은 다른거는 다 돼있고 service메서드만 오버라이딩 해서 쓰면 됨
+6. 근데 이것도 귀찮음. 더 편하게 해놓은 클래스가 있음 - HttpServlet
+7. 얘는 doget, dopost같은거 작성해주면 됨. 그러면 알아서 service 메서드 동작..
+8. ...
+
+<hr>
+
 ## Servlet이란
 - 자바에서, http요청을 분기하고 처리하고 응답까지 해주는 자바 클래스임.
 - server + applet의 합성어
@@ -51,12 +63,24 @@
 
 <br>
 
+## 컨텍스트 루트에 대한 설명
+- 톰캣에는 여러 프로젝트가 올라갈 수 있다.
+- 따라서 어떤 요청이 들어왔을 때 그것이 어느 프로젝트에 대한 요청인지 구분하기위해서, 요청경로에 프로젝트 구분을 위한 식별자가 포함되어있는것이 좋다. 
+- 그렇게 하기위해 일반적으로 포트번호 다음에 프로젝트 이름이 경로에 포함되는데, 이것을 컨텍스트 루트라고 한다.
+- 즉, 컨텍스트 루트는 톰캣안의 프로젝트를 구분하기위해 경로에 표시하는 것이다.
+
+<br>
+
+
 ## servlet사용하기 : 방법 3가지, 그 중  HttpServlet 쓴다.
  
 ### 방법1: implements Servlet
+- 서블릿 인터페이스를 구현해야함. 온갖 메서드 다 오버라이딩 직접 해서 써야됨
 ### 방법2 : extends GenericServlet
-
+- 서블릿을 구현한 추상클래스임, 서비스 메서드만 오버라이딩 하면 됨
 ### 방법3[이거쓴다] : extends HttpServlet
+- 얘는 doget, dopost등의 메서드들을 오버라이딩해주면 됨.
+- do~ 메서드들은 알아서 service메서드에 포함되어서(?) 동작시킴.
 
 <br>
 
@@ -122,7 +146,7 @@
 <br>
 
 ## 서블릿 동작방식
-1. 사용자(클라이언트)가 URL을 입력하면 HTTP Request가 Servlet Container로 전송합니다.
+1. 사용자(클라이언트)가 URL을 입력하면 HTTP Request가 Servlet Container로 전송됩니다.
 2. 요청을 전송받은 Servlet Container는 HttpServletRequest, HttpServletResponse 객체를 생성합니다.
 3. web.xml을 기반으로 사용자가 요청한 URL이 어느 서블릿에 대한 요청인지 찾습니다.
 4. 해당 서블릿에서 service메소드를 호출한 후 클리아언트의 GET, POST여부에 따라 doGet() 또는 doPost()를 호출합니다.

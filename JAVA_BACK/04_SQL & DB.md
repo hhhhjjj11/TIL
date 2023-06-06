@@ -1,16 +1,55 @@
 # MySQL
 
-## JOIN
+# JOIN
 - 둘 이상의 테이블에서 데이터를 뽑아서 보기 위해 사용
 ### JOIN 종류
-1. INNER JOIN : 조인 조건에 해당하는 칼럼 값이 양쪽테이블에 모두 존재 하는 경우에만 조회 
+## 1. INNER JOIN : 
+- 조인 조건에 해당하는 칼럼 값이 양쪽테이블에 모두 존재 하는 경우에만 조회
+- ON뒤에 join 조건 붙임. 
+### [참고] 테이블 순서는 원래는 중요한데, mySQL에서 inner join쓸때는 상관 없음. 왜냐하면 mySQL은 옵티마이저가있어서 알아서 더 효율적인 순서로 바꿔줌 
+```sql
+SELECT coulmn1 
+FROM table1 
+INNER JOIN table2
+ON table1.column = table2.column
+WHERE column1 = 1234;
+...
+SELECT column1
+FROM table2
+INNER JOIN table1
+ON table1.column = table2.column
+```
+- INNER JOIN 절을 쓰지 않고, WHERE 절 만으로도 INNER JOIN 가능
+```sql
+SELECT column1
+FROM table1, table2
+WHERE table1.column = table2.column;
+```
+```sql
+SELECT column1
+FROM table1, table2
+WHERE table1.column = table2.column
+AND column1 = 1234;
+```
+
 2. OUTER JOIN : 조인 조건에 해당하는 칼럼 값이 한 쪽 테이블에만 존재 하더라도 조회 기준 테이블에 따라 LEFT OUTER JOIN, RIGHT OUTER JOIN으로 구분 
 
 ### JOIN사용하기
 - JOIN쓸 때 , 양쪽 테이블에 다 있는 컬럼은 앞에 테이블붙여서 써줘야함. 안그러면 에러남 
 - 예) 테이블.컬럼
 
-### OUTER JOIN
+## OUTER JOIN
+- 아우터조인은 일단 중심이 되는 테이블의 데이터들에 대해 다른 테이블에서 조건에 맞는 데이터들을 덧붙이는 식임.
+- 예를들어 
+```sql
+select a,b,c 
+from table1 left outer join table2 
+on table1.col=table2.col
+```
+- 라고하면.. 일단 table1 의 모든 데이터에 대해서 table2랑 col이 같은데이터들이 있을거아님? 걔네의 a b c를 묶어서 보여주는거임.
+- 그러니까,, inner조인의 경우에는 on조건에 맞는 경우만 찾아주는 반면에, 아우터조인은 일단 table1의 모든 데이터는 일단 깔아줌. 그리고 on조건에 해당하는애들을 덧붙여줌.
+
+### LEFT OUTER JOIN 의 필요성
 - 둘 중 하나에 어떤 컬럼이 반드시 존재하지 않더라도 데이터를 조회
 - 레프트 라이트 있음
 - 언제필요?
@@ -22,6 +61,8 @@
 
 ### 비 동등 조인
 - 조인조건이 table의 PK, FK 등으로 정확히 일치하는 것이 아닐 때 사용
+
+<br>
 
 # 서브쿼리
 - SQL문 안에 있는 SQL문
@@ -167,3 +208,22 @@ SELECT ename, deptno, sal,
 (SELECT AVG(sal) FROM emp WHERE deptno = e.deptno ) as avgsal FROM emp e;
 ```
 
+<br>
+
+# 트랜잭션
+- 한번에 묶어서 처리해야만 하도록 설정하는 단위
+- 다시말해, 커밋하거나 롤백 할 수 있는 가장 작은 작업 단위
+- 이런것이 왜필요한가? 
+## 커밋
+- 트랜잭션을 종료하여 변경사항에 대해서 영구적으로 저장하는 SQL
+- 우리가 사용하는 mySQL은 autoCommit 임 
+## 롤백
+- 취소하기 하나의 트랜잭션에 의해 변경된 모든 것을 원래대로 되돌림.
+
+## 사용방법
+```sql
+set autocommit = 0;  
+START TRANSACTION
+COMMIT
+ROLLBACK
+```
