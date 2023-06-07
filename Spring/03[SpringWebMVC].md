@@ -1,4 +1,11 @@
 # Spring Web MVC
+## 요약
+Model - Service, Dao
+- 굳이 나누는 이유 : 의미와 기능을 뚜렷이 구분하기위해..
+- 서비스 -> 사용자친화적, 사용자에 최적화, 사용자입장에서 정의된 메서드이름. 예) write , regist...
+- Dao : db친화적, db사용하는데에 최적화, db관점에서 정의된 메서드이름. 예) insert, SelectOne, ...
+
+<hr>
 
 ## 구성요소
 1. DispatcherServlet - 클라이언트 요청처리
