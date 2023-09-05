@@ -21,7 +21,10 @@
     - https://haengsin.tistory.com/128
     - (에러관련) https://league-cat.tistory.com/347
 
-### 4. EC2 + Docker + Jenkins CI/CD
+### 4. 로컬 + 도커 + 젠킨스
+- https://crispyblog.kr/development/common/10
+
+### 5. EC2 + Docker + Jenkins CI/CD
 - 우선, 알아야할 것은 도커를 명령어를 통해 젠킨스를 깐다는 점. (훨씬 간편한 방법이다.)
 - 3의 방법2 에서 도커를 EC2에 설치한 것 그대로 EC2안에 도커를 설치해준다.
 - 그다음에 도커명령어로 젠킨스를 설치해준다.
