@@ -3,112 +3,110 @@ from random import randint
 
 # 예제 생성
 def example():
-    N  =randint(2,5)
+    N  =5
+    M= 5
     nums = []
-    for _ in range(N):
-        nums.append(randint(1,100))
-    op = []
-    total = 0
-    for _ in range(N):
-        total +=1
-    
-    for k in range(4):
-        if k ==3:
-            op.append(total-1)
-            continue
-        X = randint(0, total-1)
-        op.append(X)
-        total -= X
-    return N,nums,op    
+    cnt = 0
+    while True:
+        a= randint(0,N-1)
+        b = randint(0,N-1)
+        
+        if a!=b and [a,b] not in nums and [b,a] not in nums:
+             nums.append([a,b])
+             cnt +=1
+             if cnt == M:
+                  break
+
+    return N, M , nums   
 
 # 맞은 답
 
+import sys
 from collections import deque
-max_result = 0
-min_result = 0
+def right_sol(n,m,nums):
+    sys.setrecursionlimit(100000)
 
-def right_sol(n,number,op):
-    global max_result, min_result
-    add, sub, mul, div = op
-    max_result = - int(1e9)
-    min_result = int(1e9)
+    visited = [False]*(n)
+    adjacent = [ [] for _ in range(n) ]
+    global arrive 
+    arrive = False
 
-    def dfs(add, sub, mul, div, sum, idx):
-        global max_result, min_result
-        if idx == n:
-            max_result = max(max_result, sum)
-            min_result = min(min_result, sum)
-            return
-        if add:
-            dfs(add-1, sub, mul, div, sum + number[idx], idx + 1)
-        if sub:
-            dfs(add, sub-1, mul, div, sum - number[idx], idx + 1)
-        if mul:
-            dfs(add, sub, mul-1, div, sum * number[idx], idx + 1)
-        if div:
-            dfs(add, sub, mul, div-1, int(sum / number[idx]), idx + 1)
-            
-    dfs(add, sub, mul, div, number[0], 1)
-    return max_result, min_result
+    for a,b in nums:
+        adjacent[a].append(b)
+        adjacent[b].append(a)
 
+    def dfs(start , depth):
+        global arrive
+        visited[start]=True
+        if depth==5:
+            arrive = True
+        for i in adjacent[start]:
+            if visited[i] == False:
+                dfs(i , depth+1)
+        visited[start]=False
 
+    for i in range(n):
+        dfs(i ,1)
+        if arrive:
+            break
+
+    if arrive:
+        return 1
+    else:
+        return 0
 # 틀린 답
-from collections import deque
+def wrong_sol(N, M , nums):
 
-def wrong_sol(N, nums, op):
+    g = [[] for _ in range(N)]
 
+    for a,b in nums:
+        g[a].append(b)
+        g[b].append(a)
 
-    M = 0
-    m = 10 ** 9
+    for start in range(N):
+        stack = []
+        stack.append([start, 0])
+        bt = [[start, 0]]
+        visited = [0]*N
+        visited[start] = 1
 
-    deck = deque()
-    deck.append([1, nums[0], op[:]]) 
-
-    while deck:
-        cnt ,res, op2 = deck.popleft()
-        # print('cnt',cnt)
-        # print('res',res)
-        # print('op2',op2)
-        if cnt == N and sum(op2) == 0: # 계싼이 끝났고 연산자가 남아있지 않으면
-            if res < m:
-                m = res
-            if res > M:
-                M = res
-            continue
+        while stack:
         
-        for i in range(4):
-            if op2[i] != 0: # 남아있는게 있으면
-                op2[i] -=1
-                if i == 0:
-                    deck.append((cnt+1,res+nums[cnt],op2[:]))
-                elif i == 1:
-                    deck.append((cnt+1, res-nums[cnt],op2[:]))
-                elif i == 2:
-                    deck.append((cnt+1, res*nums[cnt],op2[:]))
-                elif i == 3:
-                    if res < 0:
-                        deck.append((cnt+1, -((-res)//nums[cnt]),op2[:]))
-                    else:    
-                        deck.append((cnt+1, res//nums[cnt],op2[:]))
-                op2[i]+=1
+            now, depth = stack.pop()
+            if not visited[now]:
+                visited[now]=1
+            temp = []
+            for v,d in bt:
+                if d>=depth and v != now:
+                    visited[v] = 0
+                    temp.append([v,d])
+                if d>= depth and v==now:
+                    temp.append([v,d])
+            for v,d in temp:
+                bt.remove([v,d])
 
-    return M, m
-
-
-
+            if depth == 4:
+                return 1
+                exit(0)
+            for friend in g[now]:
+                if not visited[friend]:
+                    stack.append([friend, depth+1])
+                    visited[friend] =1
+                    bt.append([friend,depth+1])
+   
+    return 0
 
 # 반례 출력
 def check():
-	ex = example()
-	right = right_sol(ex[0], ex[1],ex[2])
-	wrong = wrong_sol(ex[0], ex[1],ex[2])
+	N, M, nums = example()
+	right = right_sol(N, M, nums)
+	wrong = wrong_sol(N, M, nums)
 	if right != wrong:
-		print(ex[0], ex[1],ex[2])
-
+		print(N, M, nums)
 		print("맞은 답:", right)
 		print("틀린 답:", wrong)
 		return
 	else:
-		check()
+	    check()
 
 check()
