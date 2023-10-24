@@ -49,3 +49,12 @@ sudo vi /usr/lib/systemd/system/jenkins.service
 sudo systemctl daemon-reload
 sudo service jenkins restart
 ```
+
+
+### 다 잘 됐는데 방화벽에 막히는 경우 
+```
+sudo iptables -A INPUT -p tcp --dport 9090 -j ACCEPT
+```
+- gpt가 알려줌,
+- ec2를 껐다키면 다시 설정해줘야 한다는데 그럴일은 없으니까 뭐.. 걍 쓰면 될듯
+- 9090 포트에 대해서, 모든 외부 ip의 모든 포트에서의 접근을 허용한다는 의미.
